@@ -1,0 +1,2 @@
+﻿add_executable(WinApp WindowsApplication.cpp)
+target_link_libraries(WinApp Common_lib)
