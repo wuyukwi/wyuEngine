@@ -1,7 +1,7 @@
 ﻿#pragma once 
 #include "IRuntimeModule.hpp" 
 namespace ENGINE {
-    class GraphicsManager : implements IRuntimeModule
+    class GraphicsManager : public IRuntimeModule
     {
     public:
         virtual ~GraphicsManager() {}

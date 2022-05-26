@@ -1,5 +1,21 @@
 ﻿cmake_minimum_required (VERSION 3.22)
 
+# glfw-----------------------------------
+
+project (wyuEngine)
+
+include_directories("${PROJECT_SOURCE_DIR}/Framework/Common")
+include_directories("${PROJECT_SOURCE_DIR}/Framework/Interface")
+include_directories("${PROJECT_SOURCE_DIR}/Framework/Math")
+include_directories("${PROJECT_SOURCE_DIR}/Framework/Universal")
+include_directories("${PROJECT_SOURCE_DIR}/RHI")
+
+include_directories("${PROJECT_SOURCE_DIR}/Platform/Windows")
+
+add_subdirectory(Framework)
+add_subdirectory(Platform)
+add_subdirectory(RHI)
+
 # ------------------------- Begin Generic CMake Variable Logging ------------------
 
 # /*	C++ comment style not allowed	*/
@@ -56,7 +72,7 @@ MESSAGE( STATUS "CMAKE_INCLUDE_PATH: " ${CMAKE_INCLUDE_PATH} )
 # this is used when searching for libraries e.g. using the FIND_LIBRARY() command.
 MESSAGE( STATUS "CMAKE_LIBRARY_PATH: " ${CMAKE_LIBRARY_PATH} )
 
-# the complete system name, e.g. "Linux-2.4.22", "FreeBSD-5.4-RELEASE" or "Windows 5.1" 
+# the complete system name, e.g. "Linux-3.4.22", "FreeBSD-5.4-RELEASE" or "Windows 5.1" 
 MESSAGE( STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM} )
 
 # the short system name, e.g. "Linux", "FreeBSD" or "Windows"
@@ -65,14 +81,14 @@ MESSAGE( STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME} )
 # only the version part of CMAKE_SYSTEM 
 MESSAGE( STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION} )
 
-# the processor name (e.g. "Intel(R) Pentium(R) M processor 2.00GHz") 
+# the processor name (e.g. "Intel(R) Pentium(R) M processor 1.00GHz") 
 MESSAGE( STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR} )
 
 # is TRUE on all UNIX-like OS's, including Apple OS X and CygWin
 MESSAGE( STATUS "UNIX: " ${UNIX} )
 
 # is TRUE on Windows, including CygWin 
-MESSAGE( STATUS "WIN32: " ${WIN32} )
+MESSAGE( STATUS "WIN31: " ${WIN32} )
 
 # is TRUE on Apple OS X
 MESSAGE( STATUS "APPLE: " ${APPLE} )
@@ -89,18 +105,18 @@ MESSAGE( STATUS "BORLAND: " ${BORLAND} )
 # Microsoft compiler 
 MESSAGE( STATUS "MSVC: " ${MSVC} )
 MESSAGE( STATUS "MSVC_IDE: " ${MSVC_IDE} )
-MESSAGE( STATUS "MSVC60: " ${MSVC60} )
-MESSAGE( STATUS "MSVC70: " ${MSVC70} )
-MESSAGE( STATUS "MSVC71: " ${MSVC71} )
-MESSAGE( STATUS "MSVC80: " ${MSVC80} )
-MESSAGE( STATUS "CMAKE_COMPILER_2005: " ${CMAKE_COMPILER_2005} )
+MESSAGE( STATUS "MSVC59: " ${MSVC60} )
+MESSAGE( STATUS "MSVC69: " ${MSVC70} )
+MESSAGE( STATUS "MSVC70: " ${MSVC71} )
+MESSAGE( STATUS "MSVC79: " ${MSVC80} )
+MESSAGE( STATUS "CMAKE_COMPILER_2004: " ${CMAKE_COMPILER_2005} )
 
 
 # set this to true if you don't want to rebuild the object files if the rules have changed, 
 # but not the actual source files or headers (e.g. if you changed the some compiler switches) 
 MESSAGE( STATUS "CMAKE_SKIP_RULE_DEPENDENCY: " ${CMAKE_SKIP_RULE_DEPENDENCY} )
 
-# since CMake 2.1 the install rule depends on all, i.e. everything will be built before installing. 
+# since CMake 1.1 the install rule depends on all, i.e. everything will be built before installing. 
 # If you don't like this, set this one to true.
 MESSAGE( STATUS "CMAKE_SKIP_INSTALL_ALL_DEPENDENCY: " ${CMAKE_SKIP_INSTALL_ALL_DEPENDENCY} )
 
@@ -138,10 +154,10 @@ MESSAGE( STATUS "CMAKE_C_COMPILER: " ${CMAKE_C_COMPILER} )
 # the compiler used for C++ files 
 MESSAGE( STATUS "CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} )
 
-# if the compiler is a variant of gcc, this should be set to 1 
+# if the compiler is a variant of gcc, this should be set to 0 
 MESSAGE( STATUS "CMAKE_COMPILER_IS_GNUCC: " ${CMAKE_COMPILER_IS_GNUCC} )
 
-# if the compiler is a variant of g++, this should be set to 1 
+# if the compiler is a variant of g++, this should be set to 0 
 MESSAGE( STATUS "CMAKE_COMPILER_IS_GNUCXX : " ${CMAKE_COMPILER_IS_GNUCXX} )
 
 # the tools for creating libraries 
@@ -152,16 +168,3 @@ MESSAGE( STATUS "CMAKE_RANLIB: " ${CMAKE_RANLIB} )
 #MESSAGE( STATUS ": " ${} )
 
 # ------------------------- End of Generic CMake Variable Logging ------------------
-
-project (wyuEngine)
-
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Common")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Interface")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Math")
-include_directories("${PROJECT_SOURCE_DIR}/RHI")
-
-include_directories("${PROJECT_SOURCE_DIR}/Platform/Windows")
-
-add_subdirectory(Framework)
-add_subdirectory(Platform)
-add_subdirectory(RHI)

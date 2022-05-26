@@ -1,13 +1,24 @@
+﻿/***
+ * @Author: コウ　キガク
+ * @         黄   琦岳
+ * @Date: 2022-05-24 13:06:13
+ * @LastEditors: 黄琦岳
+ * @LastEditTime: 2022-05-25 15:31:15
+ * @FilePath: \wyuEngine\Platform\Windows\WindowsApplication.hpp
+ * @Description:
+ * @Copyright (c)2022 github: wuyukwi email: b1044763336@gmail.com, All Rights
+ * Reserved.
+ */
+
+#include "BaseApplication.hpp"
 #include <windows.h>
 #include <windowsx.h>
-#include "BaseApplication.hpp"
+
 
 namespace ENGINE {
-    class WindowsApplication : public BaseApplication
-    {
+    class WindowsApplication : public BaseApplication {
     public:
-        WindowsApplication(GfxConfiguration& config)
-            : BaseApplication(config) {};
+        WindowsApplication(GfxConfiguration& config) : BaseApplication(config) {};
 
         virtual int Initialize();
         virtual void Finalize();
@@ -15,9 +26,7 @@ namespace ENGINE {
         virtual void Tick();
 
         // the WindowProc function prototype
-        static LRESULT CALLBACK WindowProc(HWND hWnd,
-            UINT message,
-            WPARAM wParam,
+        static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam,
             LPARAM lParam);
     };
-}
+} // namespace ENGINE

@@ -4,7 +4,7 @@
 #include "GfxConfiguration.h"
 
 namespace ENGINE {
-    class BaseApplication : implements IApplication
+    class BaseApplication : public IApplication
     {
     public:
         BaseApplication(GfxConfiguration& cfg);

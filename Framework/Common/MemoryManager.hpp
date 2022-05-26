@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 #include "IRuntimeModule.hpp"
 #include "Allocator.hpp"
 #include <new>
 
 namespace ENGINE {
-    class MemoryManager : implements IRuntimeModule
+    class MemoryManager : public IRuntimeModule
     {
     public:
         template<typename T, typename... Arguments>

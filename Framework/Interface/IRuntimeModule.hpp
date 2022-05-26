@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include "Interface.hpp"
 
 namespace ENGINE {
-    Interface IRuntimeModule{
-public:
+    class IRuntimeModule {
+    public:
         virtual ~IRuntimeModule() {};
 
         virtual int Initialize() = 0;
