@@ -9,10 +9,11 @@
  * @Copyright (c)2022 github: wuyukwi email: b1044763336@gmail.com, All Rights
  * Reserved.
  */
+#pragma once
 
-#include "BaseApplication.hpp"
 #include <windows.h>
 #include <windowsx.h>
+#include "BaseApplication.hpp"
 
 
 namespace ENGINE {
@@ -25,8 +26,15 @@ namespace ENGINE {
         // One cycle of the main loop
         virtual void Tick();
 
+        inline HWND GetMainWindow() const { return m_hWnd; };
+
+    private:
         // the WindowProc function prototype
-        static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam,
+        static LRESULT CALLBACK WindowProc(HWND hWnd,
+            UINT message,
+            WPARAM wParam,
             LPARAM lParam);
+
+        HWND m_hWnd;
     };
-} // namespace ENGINE
+};// namespace ENGINE

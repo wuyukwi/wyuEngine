@@ -154,7 +154,9 @@ void ENGINE::Allocator::FillAllocatedBlock(BlockHeader* pBlock)
     std::memset(reinterpret_cast<uint8_t*>(pBlock) + m_szBlockSize - m_szAlignmentSize,
         PATTERN_ALIGN, m_szAlignmentSize);
 }
+
 #endif
+
 ENGINE::BlockHeader* ENGINE::Allocator::NextBlock(BlockHeader* pBlock) const
 {
     return reinterpret_cast<BlockHeader*>(reinterpret_cast<uint8_t*>(pBlock) + m_szBlockSize);

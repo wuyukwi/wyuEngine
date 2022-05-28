@@ -1,5 +1,12 @@
 ﻿#include "MemoryManager.hpp"
-#include <malloc.h>
+
+
+extern "C" void* malloc(size_t size);
+extern "C" void  free(void* p);
+
+#ifndef ALIGN
+#define ALIGN(x, a)         (((x) + ((a) - 1)) & ~((a) - 1))
+#endif
 
 using namespace ENGINE;
 
@@ -27,6 +34,9 @@ namespace ENGINE {
     // 有効な最大ブロックサイズ
     static const uint32_t kMaxBlockSize =
         kBlockSizes[kNumBlockSizes - 1];
+
+    size_t* MemoryManager::m_pBlockSizeLookup;
+    Allocator* MemoryManager::m_pAllocators;
 }
 
 int ENGINE::MemoryManager::Initialize()

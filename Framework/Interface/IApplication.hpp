@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "Interface.hpp"
 #include "IRuntimeModule.hpp"
+#include "GfxConfiguration.h"
 
 namespace ENGINE {
     class IApplication : public IRuntimeModule
@@ -13,6 +13,8 @@ namespace ENGINE {
         virtual void Tick() = 0;
 
         virtual bool IsQuit() = 0;
+
+        virtual GfxConfiguration& GetConfiguration() = 0;
     };
 }
 

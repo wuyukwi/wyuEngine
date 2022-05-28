@@ -1,9 +1,21 @@
 ﻿cmake_minimum_required (VERSION 3.22)
 
-# glfw-----------------------------------
+if("cxx_std_17" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+    set(CMAKE_CXX_STANDARD 17)
+
+elseif("cxx_std_14" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+    set(CMAKE_CXX_STANDARD 14)
+else()
+    # CPP11 is always enabled, so there is no need to declare it.
+    set(CMAKE_CXX_STANDARD 11)
+endif()
 
 project (wyuEngine)
 
+option(LIB "Build All Engine Modules as Static Library." OFF)
+option(CMAKE_LOG "Begin Generic CMake Variable Logging" ON)
+
+# include------------------------------------------------------
 include_directories("${PROJECT_SOURCE_DIR}/Framework/Common")
 include_directories("${PROJECT_SOURCE_DIR}/Framework/Interface")
 include_directories("${PROJECT_SOURCE_DIR}/Framework/Math")
@@ -11,6 +23,8 @@ include_directories("${PROJECT_SOURCE_DIR}/Framework/Universal")
 include_directories("${PROJECT_SOURCE_DIR}/RHI")
 
 include_directories("${PROJECT_SOURCE_DIR}/Platform/Windows")
+#----------------------------------------------------------------
+
 
 add_subdirectory(Framework)
 add_subdirectory(Platform)
@@ -20,7 +34,8 @@ add_subdirectory(RHI)
 
 # /*	C++ comment style not allowed	*/
 
-
+if(CMAKE_LOG)
+	
 # if you are building in-source, this is the same as CMAKE_SOURCE_DIR, otherwise 
 # this is the top level directory of your build tree 
 MESSAGE( STATUS "CMAKE_BINARY_DIR:         " ${CMAKE_BINARY_DIR} )
@@ -168,3 +183,4 @@ MESSAGE( STATUS "CMAKE_RANLIB: " ${CMAKE_RANLIB} )
 #MESSAGE( STATUS ": " ${} )
 
 # ------------------------- End of Generic CMake Variable Logging ------------------
+endif()
