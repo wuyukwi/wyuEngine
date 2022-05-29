@@ -1,15 +1,3 @@
-﻿set(MyGameEngineD3D12 "DX12Engie")
+﻿add_executable(MyGameEngineD3D12 WindowsApplication.cpp D3d12Application.cpp)
 
-set(SRC_FILES
-WindowsApplication.cpp
-D3D12Application.cpp
-
-WindowsApplication.hpp
-            )
-
-add_executable(${MyGameEngineD3D12} 
-${SRC_FILES}
-)
-
-target_link_libraries(${MyGameEngineD3D12}  ${Framework} ${D3DRHI})
-
+target_link_libraries(MyGameEngineD3D12 Common d3d12 dxgi d3dcompiler)

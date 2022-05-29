@@ -1,2 +1,2 @@
 ﻿add_executable(Empty EmptyApplication.cpp)
-target_link_libraries(Empty ${Framework})
+target_link_libraries(Empty Common)
