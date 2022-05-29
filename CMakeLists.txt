@@ -1,26 +1,36 @@
 ﻿cmake_minimum_required (VERSION 3.22)
 
-# glfw-----------------------------------
+if("cxx_std_17" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+    set(CMAKE_CXX_STANDARD 17)
 
+elseif("cxx_std_14" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+    set(CMAKE_CXX_STANDARD 14)
+else()
+    # CPP11 is always enabled, so there is no need to declare it.
+    set(CMAKE_CXX_STANDARD 11)
+endif()
+
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY %{PROJECT_BINARY_DIR}/bin)
 project (wyuEngine)
 
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Common")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Interface")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Math")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Universal")
-include_directories("${PROJECT_SOURCE_DIR}/RHI")
+# Define Global Constants.
+set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(BUILD_DIR ${CMAKE_BINARY_DIR})
 
-include_directories("${PROJECT_SOURCE_DIR}/Platform/Windows")
+# include------------------------------------------------------
+include_directories(Sources)
+#----------------------------------------------------------------
+add_subdirectory(Sources)
 
-add_subdirectory(Framework)
-add_subdirectory(Platform)
-add_subdirectory(RHI)
-
+set(CMAKE_LOG TRUE)
 # ------------------------- Begin Generic CMake Variable Logging ------------------
 
 # /*	C++ comment style not allowed	*/
 
-
+if(CMAKE_LOG)
+	
 # if you are building in-source, this is the same as CMAKE_SOURCE_DIR, otherwise 
 # this is the top level directory of your build tree 
 MESSAGE( STATUS "CMAKE_BINARY_DIR:         " ${CMAKE_BINARY_DIR} )
@@ -168,3 +178,4 @@ MESSAGE( STATUS "CMAKE_RANLIB: " ${CMAKE_RANLIB} )
 #MESSAGE( STATUS ": " ${} )
 
 # ------------------------- End of Generic CMake Variable Logging ------------------
+endif()
