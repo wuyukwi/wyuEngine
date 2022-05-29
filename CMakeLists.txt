@@ -13,7 +13,6 @@ endif()
 project (wyuEngine)
 
 option(LIB "Build All Engine Modules as Static Library." OFF)
-option(CMAKE_LOG "Begin Generic CMake Variable Logging" ON)
 
 # include------------------------------------------------------
 include_directories("${PROJECT_SOURCE_DIR}/Framework/Common")
@@ -30,6 +29,7 @@ add_subdirectory(Framework)
 add_subdirectory(Platform)
 add_subdirectory(RHI)
 
+set(CMAKE_LOG TRUE)
 # ------------------------- Begin Generic CMake Variable Logging ------------------
 
 # /*	C++ comment style not allowed	*/
