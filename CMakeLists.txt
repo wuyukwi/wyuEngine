@@ -10,24 +10,19 @@ else()
     set(CMAKE_CXX_STANDARD 11)
 endif()
 
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY %{PROJECT_BINARY_DIR}/bin)
 project (wyuEngine)
 
-option(LIB "Build All Engine Modules as Static Library." OFF)
+# Define Global Constants.
+set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(BUILD_DIR ${CMAKE_BINARY_DIR})
 
 # include------------------------------------------------------
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Common")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Interface")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Math")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Universal")
-include_directories("${PROJECT_SOURCE_DIR}/RHI")
-
-include_directories("${PROJECT_SOURCE_DIR}/Platform/Windows")
+include_directories(Sources)
 #----------------------------------------------------------------
-
-
-add_subdirectory(Framework)
-add_subdirectory(Platform)
-add_subdirectory(RHI)
+add_subdirectory(Sources)
 
 set(CMAKE_LOG TRUE)
 # ------------------------- Begin Generic CMake Variable Logging ------------------
