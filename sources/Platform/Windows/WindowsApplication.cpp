@@ -10,7 +10,7 @@ int ENGINE::WindowsApplication::Initialize()
     int ret = BaseApplication::Initialize();
 
     if (ret != 0)
-        return ret;
+        exit(ret);
 
     // get the HINSTANCE of the Console Program
     HINSTANCE hInstance = GetModuleHandle(NULL);
@@ -48,7 +48,7 @@ int ENGINE::WindowsApplication::Initialize()
         NULL,							// 親ウインドウのハンドル
         NULL,							// メニューハンドルまたは子ウインドウID
         hInstance,				                // インスタンスハンドル
-        NULL);							// ウインドウ作成データ
+        this);							// ウインドウ作成データ
 
 
 

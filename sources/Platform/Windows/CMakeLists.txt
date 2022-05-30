@@ -1,4 +1,4 @@
-﻿add_library(MyGameEngineD3D12 WindowsApplication.cpp D3d12Application.cpp WindowsApplication.hpp)
+﻿add_executable(MyGameEngineD3D12 WindowsApplication.cpp D3d12Application.cpp WindowsApplication.hpp)
 
 target_include_directories(MyGameEngineD3D12 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

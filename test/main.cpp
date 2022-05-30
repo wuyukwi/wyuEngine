@@ -24,4 +24,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     pEngine->Tick();
 
     pEngine->Finalize();
+
+    return 0;
 }
