@@ -17,6 +17,7 @@
 
 
 namespace ENGINE {
+
     class WindowsApplication : public BaseApplication {
     public:
         WindowsApplication(GfxConfiguration& config) : BaseApplication(config) {};
@@ -37,4 +38,5 @@ namespace ENGINE {
 
         HWND m_hWnd;
     };
+
 };// namespace ENGINE

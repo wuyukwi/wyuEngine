@@ -6,57 +6,58 @@ using namespace ENGINE;
 
 int ENGINE::WindowsApplication::Initialize()
 {
-    int result;
-
     // first call base class initialization
-    result = BaseApplication::Initialize();
+    int ret = BaseApplication::Initialize();
 
-    if (result != 0)
-        exit(result);
+    if (ret != 0)
+        exit(ret);
 
     // get the HINSTANCE of the Console Program
     HINSTANCE hInstance = GetModuleHandle(NULL);
 
-    // the handle for the window, filled by a function
-    HWND hWnd;
-    // this struct holds information for the window class
-    WNDCLASSEX wc;
+    // ウインドウクラスの構造体の初期化
+    WNDCLASSEX wcex;
+    ZeroMemory(&wcex, sizeof(WNDCLASSEX));
+    wcex.cbSize = sizeof(WNDCLASSEX);					// WNDCLASSEXのメモリサイズ
+    wcex.style = CS_CLASSDC;							// ウインドウのスタイル
+    wcex.lpfnWndProc = WindowProc;						    // ウインドウプロシージャ
+    wcex.cbClsExtra = 0;								// ０にする (通常は使用しない)
+    wcex.cbWndExtra = 0;								// ０にする (通常は使用しない)
+    wcex.hInstance = hInstance;				// インスタンスハンドル
+    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);		// タスクバーのアイコン
+    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);			// マウスカーソル
+    wcex.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);// クライアント領域の背景色
+    wcex.lpszMenuName = NULL;							// メニューバー
+    wcex.lpszClassName = "GameEngineFromScratch";				// ウインドウクラスの名前
+    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+    RegisterClassEx(&wcex);
 
-    // clear out the window class for use
-    ZeroMemory(&wc, sizeof(WNDCLASSEX));
+    // クライアント領域を指定のサイズに調整
+    RECT rect = { 0, 0, m_Config.screenWidth, m_Config.screenHeight };		// 画面サイズの構造体
+    AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE);
 
-    // fill in the struct with the needed information
-    wc.cbSize = sizeof(WNDCLASSEX);
-    wc.style = CS_HREDRAW | CS_VREDRAW;
-    wc.lpfnWndProc = WindowProc;
-    wc.hInstance = hInstance;
-    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
-    wc.lpszClassName = _T("GameEngineFromScratch");
+    HWND hwnd = CreateWindowEx(
+        0,								// 拡張ウインドウスタイル
+        "GameEngineFromScratch",		            // ウインドウスタイルの名前
+        m_Config.appName,		            // ウインドウの名前
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE,	// ウインドウスタイル
+        0,					            // ウインドウの左上X座標
+        0,					            // 　　〃　　の左上Y座標
+        (rect.right - rect.left),		//幅
+        (rect.bottom - rect.top),		//高さ
+        NULL,							// 親ウインドウのハンドル
+        NULL,							// メニューハンドルまたは子ウインドウID
+        hInstance,				                // インスタンスハンドル
+        this);							// ウインドウ作成データ
 
-    // register the window class
-    RegisterClassEx(&wc);
 
-    // create the window and use the result as the handle
-    hWnd = CreateWindowEx(0,
-        _T("GameEngineFromScratch"),      // name of the window class
-        m_Config.appName,                 // title of the window
-        WS_OVERLAPPEDWINDOW,              // window style
-        CW_USEDEFAULT,                    // x-position of the window
-        CW_USEDEFAULT,                    // y-position of the window
-        m_Config.screenWidth,             // width of the window
-        m_Config.screenHeight,            // height of the window
-        NULL,                             // we have no parent window, NULL
-        NULL,                             // we aren't using menus, NULL
-        hInstance,                        // application handle
-        this);                            // pass pointer to current object
 
-// display the window on the screen
-    ShowWindow(hWnd, SW_SHOW);
+// ウィンドウの表示
+    ShowWindow(hwnd, SW_SHOW);
 
-    m_hWnd = hWnd;
+    m_hWnd = hwnd;
 
-    return result;
+    return ret;
 }
 
 void ENGINE::WindowsApplication::Finalize()

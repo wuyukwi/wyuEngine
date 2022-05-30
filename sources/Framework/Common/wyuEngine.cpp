@@ -1,28 +1,20 @@
 ﻿/***
  * @Author: コウ　キガク
  * @         黄   琦岳
- * @Date: 2022-05-30 11:09:37
+ * @Date: 2022-05-30 09:36:45
  * @LastEditors: 黄琦岳
- * @LastEditTime: 2022-05-30 11:09:37
- * @FilePath: \wyuEngine\sources\Framework\Common\main.cpp
+ * @LastEditTime: 2022-05-30 09:36:46
+ * @FilePath: \wyuEngine\sources\Framework\Common\Engine.cpp
  * @Description:
  * @Copyright (c)2022 github: wuyukwi email: b1044763336@gmail.com, All Rights
  * Reserved.
  */
-#include "GPUManager.hpp"
-#include "IApplication.hpp"
-#include "MemoryManager.hpp"
-#include <cstdio>
 
-using namespace ENGINE;
+#include "wyuEngine.hpp"
 
-namespace ENGINE {
-    extern IApplication* g_pApp;
-    extern MemoryManager* g_pMemoryManager;
-    extern GPUManager* g_pGPUManager;
-} // namespace ENGINE
-
-int main(int argc, char** argv) {
+ // Parse command line, read configuration, initialize all sub modules
+int ENGINE::wyuEngine::Initialize()
+{
     int ret;
 
     if ((ret = g_pApp->Initialize()) != 0) {
@@ -40,15 +32,26 @@ int main(int argc, char** argv) {
         return ret;
     }
 
+    return 0;
+}
+
+
+// Finalize all sub modules and clean up all runtime temporary files.
+void ENGINE::wyuEngine::Finalize()
+{
+    g_pGPUManager->Finalize();
+    g_pMemoryManager->Finalize();
+    g_pApp->Finalize();
+}
+
+
+// One cycle of the main loop
+void ENGINE::wyuEngine::Tick()
+{
     while (!g_pApp->IsQuit()) {
         g_pApp->Tick();
         g_pMemoryManager->Tick();
         g_pGPUManager->Tick();
     }
-
-    g_pGPUManager->Finalize();
-    g_pMemoryManager->Finalize();
-    g_pApp->Finalize();
-
-    return 0;
 }
+
