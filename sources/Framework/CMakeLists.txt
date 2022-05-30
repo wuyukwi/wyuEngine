@@ -3,13 +3,13 @@
     Common/MemoryManager.cpp
     Common/BaseApplication.cpp
     Common/GPUManager.cpp 
-    Common/main.cpp
+    Common/wyuEngine.cpp
 
     Common/Allocator.hpp
     Common/MemoryManager.hpp
     Common/BaseApplication.hpp
     Common/GPUManager.hpp
-
+    Common/wyuEngine.hpp
 
     Interface/IApplication.hpp
     Interface/Interface.hpp

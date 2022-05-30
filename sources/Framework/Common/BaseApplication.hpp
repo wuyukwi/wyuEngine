@@ -2,6 +2,15 @@
 
 #include "IApplication.hpp"
 #include "GfxConfiguration.h"
+#include "GPUManager.hpp"
+#include "MemoryManager.hpp"
+
+
+namespace ENGINE {
+    extern IApplication* g_pApp;
+    extern MemoryManager* g_pMemoryManager;
+    extern GPUManager* g_pGPUManager;
+}
 
 namespace ENGINE {
     class BaseApplication : public IApplication

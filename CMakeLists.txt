@@ -23,6 +23,7 @@ set(BUILD_DIR ${CMAKE_BINARY_DIR})
 include_directories(Sources)
 #----------------------------------------------------------------
 add_subdirectory(Sources)
+add_subdirectory(test)
 
 set(CMAKE_LOG TRUE)
 # ------------------------- Begin Generic CMake Variable Logging ------------------
