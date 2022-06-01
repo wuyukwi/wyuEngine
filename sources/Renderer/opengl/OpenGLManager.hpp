@@ -13,7 +13,7 @@
  #pragma once
 #include "GPUManager.hpp"
 
-namespace ENGINE {
+namespace wyuEngine {
     class OpenGLManager : public GPUManager
     {
     public:

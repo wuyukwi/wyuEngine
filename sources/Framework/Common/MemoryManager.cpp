@@ -8,9 +8,9 @@ extern "C" void  free(void* p);
 #define ALIGN(x, a)         (((x) + ((a) - 1)) & ~((a) - 1))
 #endif
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
-namespace ENGINE {
+namespace wyuEngine {
     static const uint32_t kBlockSizes[] = {
         // 4-increments
         4,  8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48,
@@ -39,7 +39,7 @@ namespace ENGINE {
     Allocator* MemoryManager::m_pAllocators;
 }
 
-int ENGINE::MemoryManager::Initialize()
+int wyuEngine::MemoryManager::Initialize()
 {
     // 1回限りの初期化
     static bool s_bInitialized = false;
@@ -64,17 +64,17 @@ int ENGINE::MemoryManager::Initialize()
     return 0;
 }
 
-void ENGINE::MemoryManager::Finalize()
+void wyuEngine::MemoryManager::Finalize()
 {
     delete[] m_pAllocators;
     delete[] m_pBlockSizeLookup;
 }
 
-void ENGINE::MemoryManager::Tick()
+void wyuEngine::MemoryManager::Tick()
 {
 }
 
-Allocator* ENGINE::MemoryManager::LookUpAllocator(size_t size)
+Allocator* wyuEngine::MemoryManager::LookUpAllocator(size_t size)
 {
 
     // ルックアップの適格性を確認する
@@ -84,7 +84,7 @@ Allocator* ENGINE::MemoryManager::LookUpAllocator(size_t size)
         return nullptr;
 }
 
-void* ENGINE::MemoryManager::Allocate(size_t size)
+void* wyuEngine::MemoryManager::Allocate(size_t size)
 {
     Allocator* pAlloc = LookUpAllocator(size);
     if (pAlloc)
@@ -93,7 +93,25 @@ void* ENGINE::MemoryManager::Allocate(size_t size)
         return malloc(size);
 }
 
-void ENGINE::MemoryManager::Free(void* p, size_t size)
+void* MemoryManager::Allocate(size_t size, size_t alignment)
+{
+    uint8_t* p;
+    size += alignment;
+    Allocator* pAlloc = LookUpAllocator(size);
+    if (pAlloc)
+    {
+        p = reinterpret_cast<uint8_t*>(pAlloc->Allocate());
+    }
+    else
+    {
+        p = reinterpret_cast<uint8_t*>(malloc(size));
+    }
+    p = reinterpret_cast<uint8_t*>(ALIGN(reinterpret_cast<size_t>(p), alignment));
+
+    return  static_cast<void*>(p);
+}
+
+void wyuEngine::MemoryManager::Free(void* p, size_t size)
 {
     Allocator* pAlloc = LookUpAllocator(size);
     if (pAlloc)

@@ -14,11 +14,11 @@
 #include "glad/glad.h"
 #include "OpenGLManager.hpp"
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
 extern struct gladGLversionStruct GLVersion;
 
-int ENGINE::OpenGLManager::Initialize()
+int wyuEngine::OpenGLManager::Initialize()
 {
     int result;
 
@@ -49,10 +49,10 @@ int ENGINE::OpenGLManager::Initialize()
     return result;
 }
 
-void ENGINE::OpenGLManager::Finalize()
+void wyuEngine::OpenGLManager::Finalize()
 {
 }
 
-void ENGINE::OpenGLManager::Tick()
+void wyuEngine::OpenGLManager::Tick()
 {
 }

@@ -15,10 +15,10 @@
 #include "D3D12Manager.hpp"
 #include "WindowsApplication.hpp"
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
 
-namespace ENGINE {
+namespace wyuEngine {
     extern IApplication* g_pApp;
 
     template<class T>
@@ -60,7 +60,7 @@ namespace ENGINE {
     }
 }
 
-HRESULT ENGINE::D3D12Manager::CreateRenderTarget()
+HRESULT wyuEngine::D3D12Manager::CreateRenderTarget()
 {
     HRESULT hr;
 
@@ -90,7 +90,7 @@ HRESULT ENGINE::D3D12Manager::CreateRenderTarget()
     return hr;
 }
 
-HRESULT ENGINE::D3D12Manager::CreateGraphicsResources()
+HRESULT wyuEngine::D3D12Manager::CreateGraphicsResources()
 {
     HRESULT hr;
 
@@ -187,7 +187,7 @@ HRESULT ENGINE::D3D12Manager::CreateGraphicsResources()
     return hr;
 }
 
-int  ENGINE::D3D12Manager::Initialize()
+int  wyuEngine::D3D12Manager::Initialize()
 {
     int result = 0;
 
@@ -196,11 +196,11 @@ int  ENGINE::D3D12Manager::Initialize()
     return result;
 }
 
-void ENGINE::D3D12Manager::Tick()
+void wyuEngine::D3D12Manager::Tick()
 {
 }
 
-void ENGINE::D3D12Manager::Finalize()
+void wyuEngine::D3D12Manager::Finalize()
 {
     SafeRelease(&m_pFence);
     SafeRelease(&m_pVertexBuffer);

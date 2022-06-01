@@ -6,27 +6,27 @@
 #define ALIGN(x, a)         (((x) + ((a) - 1)) & ~((a) - 1))
 #endif
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
-ENGINE::Allocator::Allocator()
+Allocator::Allocator()
     : m_pPageList(nullptr), m_pFreeList(nullptr), m_szDataSize(0), m_szPageSize(0),
     m_szAlignmentSize(0), m_szBlockSize(0), m_nBlocksPerPage(0),
     m_nPages(0), m_nBlocks(0), m_nFreeBlocks(0)
 {
 }
 
-ENGINE::Allocator::Allocator(size_t data_size, size_t page_size, size_t alignment)
+Allocator::Allocator(size_t data_size, size_t page_size, size_t alignment)
     : m_pPageList(nullptr), m_pFreeList(nullptr)
 {
     Reset(data_size, page_size, alignment);
 }
 
-ENGINE::Allocator::~Allocator()
+Allocator::~Allocator()
 {
     FreeAll();
 }
 
-void ENGINE::Allocator::Reset(size_t data_size, size_t page_size, size_t alignment)
+void Allocator::Reset(size_t data_size, size_t page_size, size_t alignment)
 {
     FreeAll();
 
@@ -48,7 +48,7 @@ void ENGINE::Allocator::Reset(size_t data_size, size_t page_size, size_t alignme
     m_nBlocksPerPage = (m_szPageSize - sizeof(PageHeader)) / m_szBlockSize;
 }
 
-void* ENGINE::Allocator::Allocate()
+void* Allocator::Allocate()
 {
     if (!m_pFreeList) {
         // 新しいページを作成する
@@ -89,7 +89,7 @@ void* ENGINE::Allocator::Allocate()
     return reinterpret_cast<void*>(freeBlock);
 }
 
-void ENGINE::Allocator::Free(void* p)
+void Allocator::Free(void* p)
 {
     BlockHeader* block = reinterpret_cast<BlockHeader*>(p);
 
@@ -102,7 +102,7 @@ void ENGINE::Allocator::Free(void* p)
     ++m_nFreeBlocks;
 }
 
-void ENGINE::Allocator::FreeAll()
+void Allocator::FreeAll()
 {
     PageHeader* pPage = m_pPageList;
     while (pPage) {
@@ -121,7 +121,7 @@ void ENGINE::Allocator::FreeAll()
 }
 
 #if defined(_DEBUG)
-void ENGINE::Allocator::FillFreePage(PageHeader* pPage)
+void Allocator::FillFreePage(PageHeader* pPage)
 {
     // page header
     pPage->pNext = nullptr;
@@ -135,7 +135,7 @@ void ENGINE::Allocator::FillFreePage(PageHeader* pPage)
     }
 }
 
-void ENGINE::Allocator::FillFreeBlock(BlockHeader* pBlock)
+void Allocator::FillFreeBlock(BlockHeader* pBlock)
 {
     // block header + data
     std::memset(pBlock, PATTERN_FREE, m_szBlockSize - m_szAlignmentSize);
@@ -145,7 +145,7 @@ void ENGINE::Allocator::FillFreeBlock(BlockHeader* pBlock)
         PATTERN_ALIGN, m_szAlignmentSize);
 }
 
-void ENGINE::Allocator::FillAllocatedBlock(BlockHeader* pBlock)
+void Allocator::FillAllocatedBlock(BlockHeader* pBlock)
 {
     // block header + data
     std::memset(pBlock, PATTERN_ALLOC, m_szBlockSize - m_szAlignmentSize);
@@ -157,7 +157,7 @@ void ENGINE::Allocator::FillAllocatedBlock(BlockHeader* pBlock)
 
 #endif
 
-ENGINE::BlockHeader* ENGINE::Allocator::NextBlock(BlockHeader* pBlock) const
+BlockHeader* Allocator::NextBlock(BlockHeader* pBlock) const
 {
     return reinterpret_cast<BlockHeader*>(reinterpret_cast<uint8_t*>(pBlock) + m_szBlockSize);
 }

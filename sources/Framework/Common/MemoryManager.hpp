@@ -4,7 +4,7 @@
 #include "IRuntimeModule.hpp"
 #include "Allocator.hpp"
 
-namespace ENGINE {
+namespace wyuEngine {
     class MemoryManager : public IRuntimeModule
     {
     public:

@@ -15,9 +15,9 @@
 #include "MemoryManager.hpp"
 #include <tchar.h>
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
-namespace ENGINE {
+namespace wyuEngine {
     GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 960, 540, _T("Game Engine From Scratch (Windows DX12)"));
     IApplication* g_pApp = static_cast<IApplication*>(new WindowsApplication(config));
     GPUManager* g_pGPUManager = static_cast<GPUManager*>(new GPUManager);

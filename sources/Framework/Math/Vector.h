@@ -6,6 +6,28 @@
 #include <cmath>
 #include <algorithm>
 
+template <template<typename> class TT, typename T, int ... Indexes>
+class swizzle {
+    T v[sizeof...(Indexes)];
+
+public:
+
+    TT<T>& operator=(const TT<T>& rhs)
+    {
+        int indexes[] = { Indexes... };
+        for (int i = 0; i < sizeof...(Indexes); i++) {
+            v[indexes[i]] = rhs[i];
+        }
+        return *(TT<T>*)this;
+    }
+
+    operator TT<T>() const
+    {
+        return TT<T>(v[Indexes]...);
+    }
+
+};
+
 template<typename T, size_t SizeOfArray>
 constexpr size_t ElementCount(T(&)[SizeOfArray]) { return SizeOfArray; }
 
@@ -89,6 +111,7 @@ struct Vector4Type {
         T data[4];
         struct { T x, y, z, w; };
         struct { T r, g, b, a; };
+        swizzle<Vector4Type, T, 2, 1, 0, 3> bgra;
     };
 
     Vector4Type<T>() {};

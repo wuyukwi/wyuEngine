@@ -5,17 +5,26 @@
     Common/GPUManager.cpp 
 #    Common/wyuEngine.cpp
     Common/main.cpp
+    Common/AssetLoader.cpp
 
     Common/Allocator.hpp
     Common/MemoryManager.hpp
     Common/BaseApplication.hpp
+    Common/GfxConfiguration.h
     Common/GPUManager.hpp
 #    Common/wyuEngine.hpp
+    Common/AssetLoader.hpp
+    Common/Buffer.hpp
+    Common/utility.hpp
+
+    Common/BMP.hpp
 
     Interface/IApplication.hpp
     Interface/Interface.hpp
     Interface/IRuntimeModule.hpp
+    Interface/ImageParser.hpp
 
+    Math/EngineMath.h
     Math/common.h
     Math/Matrix.h
     Math/vector.h

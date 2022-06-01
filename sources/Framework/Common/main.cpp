@@ -14,13 +14,13 @@
 #include "MemoryManager.hpp"
 #include <cstdio>
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
-namespace ENGINE {
+namespace wyuEngine {
     extern IApplication* g_pApp;
     extern MemoryManager* g_pMemoryManager;
     extern GPUManager* g_pGPUManager;
-} // namespace ENGINE
+} // namespace wyuEngine
 
 int main(int argc, char** argv) {
     int ret;
