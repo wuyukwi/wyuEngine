@@ -13,7 +13,7 @@
 #pragma once
 #include "IRuntimeModule.hpp"
 
-namespace ENGINE {
+namespace wyuEngine {
 	class GPUManager : public IRuntimeModule
 	{
 	public:

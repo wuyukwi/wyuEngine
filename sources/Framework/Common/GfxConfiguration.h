@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cwchar>
 
-namespace ENGINE {
+namespace wyuEngine {
     struct GfxConfiguration {
         /// Inline all-elements constructor.
         /// \param[in] r the red color depth in bits

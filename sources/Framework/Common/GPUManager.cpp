@@ -12,18 +12,18 @@
 
  #include "GPUManager.hpp"
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
-int ENGINE::GPUManager::Initialize()
+int wyuEngine::GPUManager::Initialize()
 {
     int result = 0;
     return result;
 }
 
-void ENGINE::GPUManager::Finalize()
+void wyuEngine::GPUManager::Finalize()
 {
 }
 
-void ENGINE::GPUManager::Tick()
+void wyuEngine::GPUManager::Tick()
 {
 }

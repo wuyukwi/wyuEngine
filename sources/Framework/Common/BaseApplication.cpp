@@ -1,17 +1,17 @@
 ﻿#include "BaseApplication.hpp"
 #include <iostream>
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
-bool ENGINE::BaseApplication::m_bQuit = false;
+bool wyuEngine::BaseApplication::m_bQuit = false;
 
-ENGINE::BaseApplication::BaseApplication(GfxConfiguration& cfg)
+wyuEngine::BaseApplication::BaseApplication(GfxConfiguration& cfg)
     :m_Config(cfg)
 {
 }
 
 // Parse command line, read configuration, initialize all sub modules
-int ENGINE::BaseApplication::Initialize()
+int wyuEngine::BaseApplication::Initialize()
 {
     std::cout << m_Config;
 
@@ -20,17 +20,17 @@ int ENGINE::BaseApplication::Initialize()
 
 
 // Finalize all sub modules and clean up all runtime temporary files.
-void ENGINE::BaseApplication::Finalize()
+void wyuEngine::BaseApplication::Finalize()
 {
 }
 
 
 // One cycle of the main loop
-void ENGINE::BaseApplication::Tick()
+void wyuEngine::BaseApplication::Tick()
 {
 }
 
-bool ENGINE::BaseApplication::IsQuit()
+bool wyuEngine::BaseApplication::IsQuit()
 {
     return m_bQuit;
 }

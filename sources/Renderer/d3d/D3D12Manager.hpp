@@ -16,7 +16,7 @@
 #include <DXGI1_6.h>
 #include "GPUManager.hpp"
 
-namespace ENGINE {
+namespace wyuEngine {
     class D3D12Manager : public GPUManager
     {
     public:

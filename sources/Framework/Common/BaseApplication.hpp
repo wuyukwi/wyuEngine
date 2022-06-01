@@ -6,13 +6,13 @@
 #include "MemoryManager.hpp"
 
 
-namespace ENGINE {
+namespace wyuEngine {
     extern IApplication* g_pApp;
     extern MemoryManager* g_pMemoryManager;
     extern GPUManager* g_pGPUManager;
 }
 
-namespace ENGINE {
+namespace wyuEngine {
     class BaseApplication : public IApplication
     {
     public:

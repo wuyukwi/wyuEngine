@@ -1,10 +1,10 @@
 ﻿#include "WindowsApplication.hpp"
 #include <tchar.h>
 
-using namespace ENGINE;
+using namespace wyuEngine;
 
 
-int ENGINE::WindowsApplication::Initialize()
+int wyuEngine::WindowsApplication::Initialize()
 {
     // first call base class initialization
     int ret = BaseApplication::Initialize();
@@ -33,7 +33,7 @@ int ENGINE::WindowsApplication::Initialize()
     RegisterClassEx(&wcex);
 
     // クライアント領域を指定のサイズに調整
-    RECT rect = { 0, 0, m_Config.screenWidth, m_Config.screenHeight };		// 画面サイズの構造体
+    RECT rect = { 0, 0, static_cast<long>(m_Config.screenWidth),  static_cast<long>(m_Config.screenHeight) };		// 画面サイズの構造体
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE);
 
     HWND hwnd = CreateWindowEx(
@@ -60,11 +60,11 @@ int ENGINE::WindowsApplication::Initialize()
     return ret;
 }
 
-void ENGINE::WindowsApplication::Finalize()
+void wyuEngine::WindowsApplication::Finalize()
 {
 }
 
-void ENGINE::WindowsApplication::Tick()
+void wyuEngine::WindowsApplication::Tick()
 {
     // this struct holds Windows event messages
     MSG msg;
@@ -82,7 +82,7 @@ void ENGINE::WindowsApplication::Tick()
 }
 
 // this is the main message handler for the program
-LRESULT CALLBACK ENGINE::WindowsApplication::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK wyuEngine::WindowsApplication::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     WindowsApplication* pThis;
     if (message == WM_NCCREATE)

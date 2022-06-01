@@ -3,7 +3,7 @@
 #include "IRuntimeModule.hpp"
 #include "GfxConfiguration.h"
 
-namespace ENGINE {
+namespace wyuEngine {
     class IApplication : public IRuntimeModule
     {
     public:

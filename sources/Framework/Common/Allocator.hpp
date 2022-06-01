@@ -1,7 +1,7 @@
 ﻿#include <cstddef>
 #include <cstdint>
 
-namespace ENGINE {
+namespace wyuEngine {
 
     struct BlockHeader {
         // 次のブロック

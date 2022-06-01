@@ -16,11 +16,11 @@
 #include "BaseApplication.hpp"
 
 
-namespace ENGINE {
+namespace wyuEngine {
 
     class WindowsApplication : public BaseApplication {
     public:
-        WindowsApplication(GfxConfiguration& config) : BaseApplication(config) {};
+        WindowsApplication(GfxConfiguration& config) : BaseApplication(config) {}
 
         virtual int Initialize();
         virtual void Finalize();
@@ -39,4 +39,4 @@ namespace ENGINE {
         HWND m_hWnd;
     };
 
-};// namespace ENGINE
+};// namespace wyuEngine

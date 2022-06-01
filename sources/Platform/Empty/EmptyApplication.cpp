@@ -3,7 +3,7 @@
 #include "MemoryManager.hpp"
 
 
-namespace ENGINE {
+namespace wyuEngine {
     GfxConfiguration config;
     IApplication* g_pApp = static_cast<IApplication*>(new BaseApplication(config));
     GPUManager* g_pGPUManager = static_cast<GPUManager*>(new GPUManager);
