@@ -2,14 +2,14 @@
 
 #include "IApplication.hpp"
 #include "GfxConfiguration.h"
-#include "GPUManager.hpp"
+#include "RendererManager.hpp"
 #include "MemoryManager.hpp"
 
 
 namespace wyuEngine {
     extern IApplication* g_pApp;
     extern MemoryManager* g_pMemoryManager;
-    extern GPUManager* g_pGPUManager;
+    extern RendererManager* g_pGPUManager;
 }
 
 namespace wyuEngine {

@@ -100,7 +100,7 @@ AssetLoader::AssetFilePtr AssetLoader::OpenFile(const char* name, AssetOpenMode 
 {
     FILE* fp = nullptr;
 
-    //階層をN回ループし、各レベルでテストします
+    //階層パスをN回ループし、各レベルで探します
     string upPath;
     string fullPath;
     for (int32_t i = 0; i < 10; i++)

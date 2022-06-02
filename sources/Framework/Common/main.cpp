@@ -9,7 +9,7 @@
  * @Copyright (c)2022 github: wuyukwi email: b1044763336@gmail.com, All Rights
  * Reserved.
  */
-#include "GPUManager.hpp"
+#include "RendererManager.hpp"
 #include "IApplication.hpp"
 #include "MemoryManager.hpp"
 #include <cstdio>
@@ -19,7 +19,7 @@ using namespace wyuEngine;
 namespace wyuEngine {
     extern IApplication* g_pApp;
     extern MemoryManager* g_pMemoryManager;
-    extern GPUManager* g_pGPUManager;
+    extern RendererManager* g_pGPUManager;
 } // namespace wyuEngine
 
 int main(int argc, char** argv) {

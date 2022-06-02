@@ -10,11 +10,11 @@
  * Reserved.
  */
 
- #pragma once
-#include "GPUManager.hpp"
+#pragma once
+#include "RendererManager.hpp"
 
 namespace wyuEngine {
-    class OpenGLManager : public GPUManager
+    class OpenGLManager : public RendererManager
     {
     public:
         virtual int Initialize();

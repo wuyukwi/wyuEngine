@@ -1,5 +1,5 @@
 ﻿#include <objbase.h>
-#include "D2dGraphicsManager.hpp"
+#include "D2DRendererManager.hpp"
 #include "WindowsApplication.hpp"
 #include "utility.hpp"
 
@@ -10,7 +10,7 @@ namespace wyuEngine {
     extern IApplication* g_pApp;
 }
 
-HRESULT D2dGraphicsManager::CreateGraphicsResources()
+HRESULT D2DRendererManager::CreateGraphicsResources()
 {
     HRESULT hr = S_OK;
 
@@ -21,7 +21,7 @@ HRESULT D2dGraphicsManager::CreateGraphicsResources()
         RECT rc;
         GetClientRect(hWnd, &rc);
 
-        D2D1_SIZE_U size = D2D1::SizeU(rc.right - rc.left,
+        const D2D1_SIZE_U size = D2D1::SizeU(rc.right - rc.left,
             rc.bottom - rc.top);
 
         hr = m_pFactory->CreateHwndRenderTarget(
@@ -33,7 +33,7 @@ HRESULT D2dGraphicsManager::CreateGraphicsResources()
     return hr;
 }
 
-int  D2dGraphicsManager::Initialize()
+int  D2DRendererManager::Initialize()
 {
     int result = 0;
 
@@ -49,11 +49,11 @@ int  D2dGraphicsManager::Initialize()
     return result;
 }
 
-void D2dGraphicsManager::Tick()
+void D2DRendererManager::Tick()
 {
 }
 
-void D2dGraphicsManager::Finalize()
+void D2DRendererManager::Finalize()
 {
     SafeRelease(&m_pRenderTarget);
     SafeRelease(&m_pFactory);

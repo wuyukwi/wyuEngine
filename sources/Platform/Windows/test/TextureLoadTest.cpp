@@ -11,7 +11,7 @@
  */
 #include "AssetLoader.hpp"
 #include "BMP.hpp"
-#include "Renderer/D2d/D2dGraphicsManager.hpp"
+#include "Renderer/D2d/D2DRendererManager.hpp"
 #include "MemoryManager.hpp"
 #include "WindowsApplication.hpp"
 #include "utility.hpp"
@@ -21,18 +21,10 @@
 using namespace wyuEngine;
 using namespace std;
 
-//namespace wyuEngine {
-//    GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 960, 540, _T("Game Engine From Scratch (Windows DX12)"));
-//    IApplication* g_pApp = static_cast<IApplication*>(new WindowsApplication(config));
-//    GPUManager* g_pGPUManager = static_cast<GPUManager*>(new GPUManager);
-//    MemoryManager* g_pMemoryManager = static_cast<MemoryManager*>(new MemoryManager);
-//
-
-
 namespace wyuEngine {
-    class TestGraphicsManager : public D2dGraphicsManager {
+    class TestGraphicsManager : public D2DRendererManager {
     public:
-        using D2dGraphicsManager::D2dGraphicsManager;
+        using D2DRendererManager::D2DRendererManager;
         void DrawBitmap(const Image image[], int32_t index);
 
     private:
@@ -43,9 +35,9 @@ namespace wyuEngine {
     public:
         using WindowsApplication::WindowsApplication;
 
-        virtual int Initialize();
+        int Initialize() override;
 
-        virtual void OnDraw();
+        void OnDraw() override;
 
     private:
         Image m_Image[2];
@@ -53,26 +45,21 @@ namespace wyuEngine {
 } // namespace My
 
 namespace wyuEngine {
-    GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 1024, 512,
-        _T("Texture Load Test (Windows)"));
-    IApplication* g_pApp = static_cast<IApplication*>(new TestApplication(config));
-    GPUManager* g_pGPUManager =
-        static_cast<GPUManager*>(new TestGraphicsManager);
-    MemoryManager* g_pMemoryManager =
-        static_cast<MemoryManager*>(new MemoryManager);
+    GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 1024, 512, "Texture Load Test (Windows)");
+    IApplication* g_pApp = new TestApplication(config);
+    RendererManager* g_pGPUManager = new TestGraphicsManager;
+    MemoryManager* g_pMemoryManager = new MemoryManager;
 
 } // namespace My
 
 int TestApplication::Initialize() {
-    int result;
 
-    result = WindowsApplication::Initialize();
+    const int result = WindowsApplication::Initialize();
 
     if (result == 0) {
         AssetLoader asset_loader;
         BmpParser parser;
-        Buffer buf =
-            asset_loader.SyncOpenAndReadBinary("Textures/icelogo-color.bmp");
+        Buffer buf = asset_loader.SyncOpenAndReadBinary("Textures/icelogo-color.bmp");
 
         m_Image[0] = parser.Parse(buf);
 

@@ -12,7 +12,7 @@
 
 #include <objbase.h>
 #include <d3dcompiler.h>
-#include "D3D12Manager.hpp"
+#include "D3D12RendererManager.hpp"
 #include "WindowsApplication.hpp"
 
 using namespace wyuEngine;
@@ -60,7 +60,7 @@ namespace wyuEngine {
     }
 }
 
-HRESULT wyuEngine::D3D12Manager::CreateRenderTarget()
+HRESULT wyuEngine::D3D12RendererManager::CreateRenderTarget()
 {
     HRESULT hr;
 
@@ -90,7 +90,7 @@ HRESULT wyuEngine::D3D12Manager::CreateRenderTarget()
     return hr;
 }
 
-HRESULT wyuEngine::D3D12Manager::CreateGraphicsResources()
+HRESULT wyuEngine::D3D12RendererManager::CreateGraphicsResources()
 {
     HRESULT hr;
 
@@ -187,7 +187,7 @@ HRESULT wyuEngine::D3D12Manager::CreateGraphicsResources()
     return hr;
 }
 
-int  wyuEngine::D3D12Manager::Initialize()
+int  wyuEngine::D3D12RendererManager::Initialize()
 {
     int result = 0;
 
@@ -196,11 +196,11 @@ int  wyuEngine::D3D12Manager::Initialize()
     return result;
 }
 
-void wyuEngine::D3D12Manager::Tick()
+void wyuEngine::D3D12RendererManager::Tick()
 {
 }
 
-void wyuEngine::D3D12Manager::Finalize()
+void wyuEngine::D3D12RendererManager::Finalize()
 {
     SafeRelease(&m_pFence);
     SafeRelease(&m_pVertexBuffer);

@@ -2,7 +2,7 @@
     Common/Allocator.cpp
     Common/MemoryManager.cpp
     Common/BaseApplication.cpp
-    Common/GPUManager.cpp 
+    Common/RendererManager.cpp 
 #    Common/wyuEngine.cpp
     Common/main.cpp
     Common/AssetLoader.cpp
@@ -11,7 +11,7 @@
     Common/MemoryManager.hpp
     Common/BaseApplication.hpp
     Common/GfxConfiguration.h
-    Common/GPUManager.hpp
+    Common/RendererManager.hpp
 #    Common/wyuEngine.hpp
     Common/AssetLoader.hpp
     Common/Buffer.hpp
