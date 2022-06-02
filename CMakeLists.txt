@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project (wyuEngine)
 
 # Define Global Constants.
-set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(ROOT_DIR ${PROJECT_SOURCE_DIR})
 set(BUILD_DIR ${CMAKE_BINARY_DIR})
 
 # include------------------------------------------------------
