@@ -7,7 +7,7 @@ using namespace wyuEngine;
 int wyuEngine::WindowsApplication::Initialize()
 {
     // first call base class initialization
-    int ret = BaseApplication::Initialize();
+    const int ret = BaseApplication::Initialize();
 
     if (ret != 0)
         exit(ret);
@@ -52,8 +52,11 @@ int wyuEngine::WindowsApplication::Initialize()
 
 
 
-// ウィンドウの表示
+    // ウィンドウの表示
     ShowWindow(hwnd, SW_SHOW);
+
+    // マウス位置初期化
+    SetCursorPos(0, 0);
 
     m_hWnd = hwnd;
 
@@ -66,30 +69,31 @@ void wyuEngine::WindowsApplication::Finalize()
 
 void wyuEngine::WindowsApplication::Tick()
 {
-    // this struct holds Windows event messages
+    // ウィンドウズメッセージハンドル
     MSG msg;
 
-    // we use PeekMessage instead of GetMessage here
-    // because we should not block the thread at anywhere
-    // except the engine execution driver module 
+    // メッセージループ
     if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-        // translate keystroke messages into the right format
+        // 仮想メッセージを文字メッセージへ変換
         TranslateMessage(&msg);
 
-        // send the message to the WindowProc function
+        // ウィンドウプロシージャへメッセージを送信
         DispatchMessage(&msg);
     }
 }
 
-// this is the main message handler for the program
+// メインメッセージハンドラー
 LRESULT CALLBACK wyuEngine::WindowsApplication::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     WindowsApplication* pThis;
     if (message == WM_NCCREATE)
     {
+        // CREATESTRUCT構造体を取得
         pThis = static_cast<WindowsApplication*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
 
-        SetLastError(0);
+        SetLastError(0);  //エラーコードの設定
+
+        // ポインターサイズの設定(32/64ビット)
         if (!SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis)))
         {
             if (GetLastError() != 0)
@@ -101,7 +105,7 @@ LRESULT CALLBACK wyuEngine::WindowsApplication::WindowProc(HWND hWnd, UINT messa
         pThis = reinterpret_cast<WindowsApplication*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
     }
 
-    // sort through and find what code to run for the message given
+    // 並べ替えて、指定されたメッセージに対して実行するコードを見つけます
     switch (message)
     {
     case WM_PAINT:
@@ -117,17 +121,17 @@ LRESULT CALLBACK wyuEngine::WindowsApplication::WindowProc(HWND hWnd, UINT messa
     }
     break;
 
-    // this message is read when the window is closed
+    // ウィンドウ破棄のメッセージ
     case WM_DESTROY:
     {
-        // close the application entirely
+        // WM_QUITメッセージを送る
         PostQuitMessage(0);
         m_bQuit = true;
         return 0;
     }
     }
 
-    // Handle any messages the switch statement didn't
+    // switchステートメントが処理しなかったメッセージを処理します
     return DefWindowProc(hWnd, message, wParam, lParam);
 }
 

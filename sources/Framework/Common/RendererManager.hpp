@@ -14,14 +14,14 @@
 #include "IRuntimeModule.hpp"
 
 namespace wyuEngine {
-	class GPUManager : public IRuntimeModule
-	{
-	public:
-		virtual ~GPUManager() {}
+    class RendererManager : public IRuntimeModule
+    {
+    public:
+        virtual ~RendererManager() {}
 
-       	virtual int Initialize();
-	    virtual void Finalize();
+        virtual int Initialize();
+        virtual void Finalize();
 
-	    virtual void Tick();
-	};
+        virtual void Tick();
+    };
 }

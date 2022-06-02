@@ -14,10 +14,10 @@
 #include <cstdint>
 #include <d3d12.h>
 #include <DXGI1_6.h>
-#include "GPUManager.hpp"
+#include "RendererManager.hpp"
 
 namespace wyuEngine {
-    class D3D12Manager : public GPUManager
+    class D3D12RendererManager : public RendererManager
     {
     public:
         virtual int Initialize();

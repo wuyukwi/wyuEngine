@@ -10,20 +10,20 @@
  * Reserved.
  */
 
- #include "GPUManager.hpp"
+#include "RendererManager.hpp"
 
 using namespace wyuEngine;
 
-int wyuEngine::GPUManager::Initialize()
+int wyuEngine::RendererManager::Initialize()
 {
     int result = 0;
     return result;
 }
 
-void wyuEngine::GPUManager::Finalize()
+void wyuEngine::RendererManager::Finalize()
 {
 }
 
-void wyuEngine::GPUManager::Tick()
+void wyuEngine::RendererManager::Tick()
 {
 }

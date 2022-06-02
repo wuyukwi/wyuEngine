@@ -10,11 +10,11 @@
  * Reserved.
  */
 #pragma once
-#include "GPUManager.hpp"
+#include "RendererManager.hpp"
 #include <d2d1.h>
 
 namespace wyuEngine {
-    class D2dGraphicsManager : public GPUManager {
+    class D2DRendererManager : public RendererManager {
     public:
         virtual int Initialize();
         virtual void Finalize();

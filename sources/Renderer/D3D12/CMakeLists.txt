@@ -1,6 +1,6 @@
 ﻿set(SRC_FILES
-	D3D12Manager.cpp
-	D3D12Manager.hpp
+	D3D12RendererManager.cpp
+	D3D12RendererManager.hpp
 )
 
 add_library(D3D12Renderer STATIC

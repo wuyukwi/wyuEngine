@@ -1,6 +1,6 @@
-add_library(D2dRHI
-D2dGraphicsManager.cpp
-D2dGraphicsManager.hpp
+﻿add_library(D2DRenderer
+D2DRendererManager.cpp
+D2DRendererManager.hpp
 )
 
-target_link_libraries(D2dRHI Framework WindowsApplication)
+target_link_libraries(D2DRenderer Framework WindowsApplication)
