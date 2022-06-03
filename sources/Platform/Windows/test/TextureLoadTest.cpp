@@ -10,13 +10,14 @@
  * Reserved.
  */
 #include "AssetLoader.hpp"
-#include "BMP.hpp"
-#include "Renderer/D2d/D2DRendererManager.hpp"
+ //#include "BMP.hpp"
+#include "D2DRendererManager.hpp"
 #include "MemoryManager.hpp"
 #include "WindowsApplication.hpp"
 #include "utility.hpp"
 #include <iostream>
 #include <tchar.h>
+#include "stb_image.h"
 
 using namespace wyuEngine;
 using namespace std;
@@ -58,14 +59,18 @@ int TestApplication::Initialize() {
 
     if (result == 0) {
         AssetLoader asset_loader;
-        BmpParser parser;
-        Buffer buf = asset_loader.SyncOpenAndReadBinary("Textures/icelogo-color.bmp");
+        /*   BmpParser parser;
+           Buffer buf = asset_loader.SyncOpenAndReadBinary("Textures/icelogo-color.bmp");
 
-        m_Image[0] = parser.Parse(buf);
+           m_Image[0] = parser.Parse(buf);
 
-        buf = asset_loader.SyncOpenAndReadBinary("Textures/icelogo-normal.bmp");
+           buf = asset_loader.SyncOpenAndReadBinary("Textures/icelogo-normal.bmp");
 
-        m_Image[1] = parser.Parse(buf);
+           m_Image[1] = parser.Parse(buf);
+
+           m_Image[0].data = (buf.m_pData, m_Image[0].Width, m_Image[0].Height)*/
+        asset_loader.SyncOpenAndReadImage("Textures/icelogo-color.bmp", m_Image[0]);
+        asset_loader.SyncOpenAndReadImage("Textures/icelogo-normal.bmp", m_Image[1]);
     }
 
     return result;
@@ -91,8 +96,8 @@ void TestGraphicsManager::DrawBitmap(const Image* image, int32_t index) {
     props.dpiY = 72.0f;
     SafeRelease(&m_pBitmap);
     hr = m_pRenderTarget->CreateBitmap(
-        D2D1::SizeU(image[index].Width, image[index].Height), image[index].data,
-        image[index].pitch, props, &m_pBitmap);
+        D2D1::SizeU(image[index].Width, image[index].Height), image[index].pBuffer->m_pData,
+        image[index].Width * image[index].channels, props, &m_pBitmap);
 
     D2D1_SIZE_F rtSize = m_pRenderTarget->GetSize();
     D2D1_SIZE_F bmpSize = m_pBitmap->GetSize();

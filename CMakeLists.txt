@@ -21,8 +21,9 @@ set(ROOT_DIR ${PROJECT_SOURCE_DIR})
 set(BUILD_DIR ${CMAKE_BINARY_DIR})
 
 # include------------------------------------------------------
-include_directories(Sources)
+#include_directories(Sources)
 #----------------------------------------------------------------
+add_subdirectory(SDK)
 add_subdirectory(Sources)
 add_subdirectory(test)
 

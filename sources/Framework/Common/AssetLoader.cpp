@@ -11,6 +11,7 @@
  */
 
 #include "AssetLoader.hpp"
+#include "stb_image.h"
 
 using namespace std;
 using namespace wyuEngine;
@@ -135,6 +136,9 @@ AssetLoader::AssetFilePtr AssetLoader::OpenFile(const char* name, AssetOpenMode 
             case ENGINE_OPEN_BINARY:
                 fopen_s(&fp, fullPath.c_str(), "rb");
                 break;
+            case ENGINE_OPEN_IMAGE:
+                fopen_s(&fp, fullPath.c_str(), "rb");
+                break;
             }
 
             if (fp) return (AssetFilePtr)fp;
@@ -212,6 +216,38 @@ Buffer AssetLoader::SyncOpenAndReadBinary(const char* filePath)
 #endif
 
     return *pBuff;
+}
+
+bool AssetLoader::SyncOpenAndReadImage(const char* filePath, Image& pImage)
+{
+
+    AssetFilePtr fp = OpenFile(filePath, ENGINE_OPEN_IMAGE);
+    size_t length = 0;
+    int x, y, comp;
+
+    if (fp)
+    {
+        length = GetSize(fp);
+        pImage.pBuffer = new Buffer(length + 1);
+        pImage.pBuffer->m_pData = stbi_load_from_file(static_cast<FILE*>(fp), &x, &y, &comp, 0);
+        pImage.Width = x;
+        pImage.Height = y;
+        pImage.channels = comp;
+
+        CloseFile(fp);
+    }
+    else
+    {
+        fprintf(stderr, "Error opening file '%s'\n", filePath);
+        pImage.pBuffer = new Buffer();
+        return false;
+    }
+
+#ifdef _DEBUG
+    fprintf(stderr, "Read file '%s',%d bytes\n", filePath, int(length));
+#endif
+
+    return true;
 }
 
 /**

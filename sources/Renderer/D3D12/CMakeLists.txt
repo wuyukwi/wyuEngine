@@ -3,7 +3,7 @@
 	D3D12RendererManager.hpp
 )
 
-add_library(D3D12Renderer STATIC
+add_library(D3D12Renderer 
 ${SRC_FILES}
 )
 

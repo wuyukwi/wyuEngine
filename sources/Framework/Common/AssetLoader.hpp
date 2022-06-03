@@ -17,6 +17,7 @@
 #include <vector>
 #include "IRuntimeModule.hpp"
 #include "Buffer.hpp"
+#include "Image.hpp"
 
 namespace wyuEngine {
 
@@ -35,6 +36,7 @@ namespace wyuEngine {
         {
             ENGINE_OPEN_TEXT = 0,
             ENGINE_OPEN_BINARY,
+            ENGINE_OPEN_IMAGE
         };
 
         enum AssetSeekBase {
@@ -54,6 +56,8 @@ namespace wyuEngine {
         Buffer SyncOpenAndReadText(const char* filePath);
 
         Buffer SyncOpenAndReadBinary(const char* filePath);
+
+        bool SyncOpenAndReadImage(const char* filePath, Image& pImage);
 
         size_t SyncRead(const AssetFilePtr& fp, Buffer& buf);
 

@@ -11,7 +11,7 @@
  */
 
 #include "WindowsApplication.hpp"
-#include "D3D12Manager.hpp" 
+#include "D3D12RendererManager.hpp" 
 #include "MemoryManager.hpp"
 #include <tchar.h>
 
