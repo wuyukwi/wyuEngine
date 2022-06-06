@@ -17,6 +17,7 @@
 #include <vector>
 #include "IRuntimeModule.hpp"
 #include "Buffer.hpp"
+#include "Image.hpp"
 
 namespace wyuEngine {
 
@@ -35,6 +36,7 @@ namespace wyuEngine {
         {
             ENGINE_OPEN_TEXT = 0,
             ENGINE_OPEN_BINARY,
+            ENGINE_OPEN_IMAGE
         };
 
         enum AssetSeekBase {
@@ -55,6 +57,8 @@ namespace wyuEngine {
 
         Buffer SyncOpenAndReadBinary(const char* filePath);
 
+        bool SyncOpenAndReadImage(const char* filePath, Image& pImage);
+
         size_t SyncRead(const AssetFilePtr& fp, Buffer& buf);
 
         static void CloseFile(AssetFilePtr& fp);
@@ -67,14 +71,15 @@ namespace wyuEngine {
         {
             std::string result;
             const Buffer buffer = SyncOpenAndReadText(fileName);
-            char* content = reinterpret_cast<char*>(buffer.m_pData);
+            /*     uint8_t* t = buffer.GetData();
+                 char* content = reinterpret_cast<char*>(buffer.GetData());
 
-            if (content)
-            {
-                result = std::string(content);
-            }
+                 if (content)
+                 {
+                     result = std::string(content);
+                 }
 
-            return result;
+                 return result;*/
         }
     private:
         std::vector<std::string> m_strSearchPath;

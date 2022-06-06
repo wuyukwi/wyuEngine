@@ -19,9 +19,9 @@ namespace wyuEngine {
     public:
         virtual ~RendererManager() {}
 
-        virtual int Initialize();
-        virtual void Finalize();
+        virtual int Initialize() override;
+        virtual void Finalize() override;
 
-        virtual void Tick();
+        virtual void Tick() override;
     };
 }

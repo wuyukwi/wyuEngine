@@ -1,9 +1,9 @@
 ﻿set(SRC_FILES
-	D3D12RendererManager.cpp
-	D3D12RendererManager.hpp
+	D3D12Renderer.cpp
+	D3D12Renderer.hpp
 )
 
-add_library(D3D12Renderer STATIC
+add_library(D3D12Renderer 
 ${SRC_FILES}
 )
 

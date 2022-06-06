@@ -22,11 +22,11 @@ namespace wyuEngine {
         }
 
     public:
-        virtual ~MemoryManager() {}
+        virtual ~MemoryManager() override {}
 
-        virtual int Initialize();
-        virtual void Finalize();
-        virtual void Tick();
+        virtual int Initialize() override;
+        virtual void Finalize() override;
+        virtual void Tick() override;
 
         void* Allocate(size_t size);
         void* Allocate(size_t size, size_t alignment);
@@ -34,7 +34,10 @@ namespace wyuEngine {
     private:
         static size_t* m_pBlockSizeLookup;
         static Allocator* m_pAllocators;
+        static bool       m_bInitialized;
 
         static Allocator* LookUpAllocator(size_t size);
     };
+
+    extern MemoryManager* g_pMemoryManager;
 }

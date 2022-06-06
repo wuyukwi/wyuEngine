@@ -6,6 +6,8 @@ add_executable(MyGameEngineD3D12 D3d12Application.cpp)
 
 #target_include_directories(MyGameEngineD3D12 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(MyGameEngineD3D12 PRIVATE WindowsApplication Framework D3D12Renderer dxgi d3dcompiler)
+target_link_libraries(MyGameEngineD3D12 PRIVATE WindowsApplication D3D12Renderer d3d12 dxgi d3dcompiler)
 
+add_executable(MyGameEngineD3D9 D3D9Application.cpp)
+target_link_libraries(MyGameEngineD3D9 PRIVATE WindowsApplication D3D9Renderer)
 add_subdirectory(test)
