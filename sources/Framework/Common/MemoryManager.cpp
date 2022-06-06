@@ -1,9 +1,5 @@
 ﻿#include "MemoryManager.hpp"
 
-
-extern "C" void* malloc(size_t size);
-extern "C" void  free(void* p);
-
 #ifndef ALIGN
 #define ALIGN(x, a)         (((x) + ((a) - 1)) & ~((a) - 1))
 #endif
@@ -37,13 +33,12 @@ namespace wyuEngine {
 
     size_t* MemoryManager::m_pBlockSizeLookup;
     Allocator* MemoryManager::m_pAllocators;
+    bool MemoryManager::m_bInitialized = false;
 }
 
 int wyuEngine::MemoryManager::Initialize()
 {
-    // 1回限りの初期化
-    static bool s_bInitialized = false;
-    if (!s_bInitialized) {
+    if (!m_bInitialized) {
         // ブロックサイズルックアップテーブルを初期化します
         m_pBlockSizeLookup = new size_t[kMaxBlockSize + 1];
         size_t j = 0;
@@ -58,7 +53,7 @@ int wyuEngine::MemoryManager::Initialize()
             m_pAllocators[i].Reset(kBlockSizes[i], kPageSize, kAlignment);
         }
 
-        s_bInitialized = true;
+        m_bInitialized = true;
     }
 
     return 0;
@@ -113,9 +108,11 @@ void* MemoryManager::Allocate(size_t size, size_t alignment)
 
 void wyuEngine::MemoryManager::Free(void* p, size_t size)
 {
-    Allocator* pAlloc = LookUpAllocator(size);
-    if (pAlloc)
-        pAlloc->Free(p);
-    else
-        free(p);
+    if (m_bInitialized) {
+        Allocator* pAlloc = LookUpAllocator(size);
+        if (pAlloc)
+            pAlloc->Free(p);
+        else
+            free(p);
+    }
 }

@@ -71,14 +71,15 @@ namespace wyuEngine {
         {
             std::string result;
             const Buffer buffer = SyncOpenAndReadText(fileName);
-            char* content = reinterpret_cast<char*>(buffer.m_pData);
+            /*     uint8_t* t = buffer.GetData();
+                 char* content = reinterpret_cast<char*>(buffer.GetData());
 
-            if (content)
-            {
-                result = std::string(content);
-            }
+                 if (content)
+                 {
+                     result = std::string(content);
+                 }
 
-            return result;
+                 return result;*/
         }
     private:
         std::vector<std::string> m_strSearchPath;

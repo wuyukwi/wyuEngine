@@ -11,7 +11,7 @@
  */
 
 #include "WindowsApplication.hpp"
-#include "D3D12RendererManager.hpp" 
+#include "D3D12Renderer.hpp" 
 #include "MemoryManager.hpp"
 #include <tchar.h>
 
@@ -20,7 +20,7 @@ using namespace wyuEngine;
 namespace wyuEngine {
     GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 960, 540, _T("Game Engine From Scratch (Windows DX12)"));
     IApplication* g_pApp = static_cast<IApplication*>(new WindowsApplication(config));
-    RendererManager* g_pGPUManager = static_cast<RendererManager*>(new RendererManager);
+    RendererManager* g_pGPUManager = static_cast<RendererManager*>(new D3D12Renderer);
     MemoryManager* g_pMemoryManager = static_cast<MemoryManager*>(new MemoryManager);
 
 }

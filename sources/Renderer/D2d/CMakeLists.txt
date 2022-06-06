@@ -1,6 +1,6 @@
 ﻿add_library(D2DRenderer
-D2DRendererManager.cpp
-D2DRendererManager.hpp
+D2DRenderer.cpp
+D2DRenderer.hpp
 )
 
 target_include_directories(D2DRenderer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

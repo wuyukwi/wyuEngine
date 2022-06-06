@@ -167,8 +167,8 @@ Buffer AssetLoader::SyncOpenAndReadText(const char* filePath)
         length = GetSize(fp);
 
         pBuff = new Buffer(length + 1);
-        fread(pBuff->m_pData, length, 1, static_cast<FILE*>(fp));
-        pBuff->m_pData[length] = '\0';
+        fread(pBuff->GetData(), length, 1, static_cast<FILE*>(fp));
+        pBuff->GetData()[length] = '\0';
 
         CloseFile(fp);
     }
@@ -201,7 +201,7 @@ Buffer AssetLoader::SyncOpenAndReadBinary(const char* filePath)
         length = GetSize(fp);
 
         pBuff = new Buffer(length + 1);
-        fread(pBuff->m_pData, length, 1, static_cast<FILE*>(fp));
+        fread(pBuff->GetData(), length, 1, static_cast<FILE*>(fp));
 
         CloseFile(fp);
     }
@@ -221,15 +221,16 @@ Buffer AssetLoader::SyncOpenAndReadBinary(const char* filePath)
 bool AssetLoader::SyncOpenAndReadImage(const char* filePath, Image& pImage)
 {
 
-    AssetFilePtr fp = OpenFile(filePath, ENGINE_OPEN_IMAGE);
+    AssetFilePtr fp = OpenFile(filePath, ENGINE_OPEN_BINARY);
     size_t length = 0;
     int x, y, comp;
+    const int info = stbi_info_from_file(static_cast<FILE*>(fp), &x, &y, &comp);
 
-    if (fp)
+    if (fp && info)
     {
         length = GetSize(fp);
-        pImage.pBuffer = new Buffer(length + 1);
-        pImage.pBuffer->m_pData = stbi_load_from_file(static_cast<FILE*>(fp), &x, &y, &comp, 0);
+        pImage.pBuffer = new Buffer(length);
+        pImage.pBuffer->GetData() = stbi_load_from_file(static_cast<FILE*>(fp), &x, &y, &comp, 4);
         pImage.Width = x;
         pImage.Height = y;
         pImage.channels = comp;
@@ -291,7 +292,7 @@ size_t AssetLoader::SyncRead(const AssetFilePtr& fp, Buffer& buf)
         return 0;
     }
 
-    const size_t sz = fread(buf.m_pData, buf.m_szSize, 1, static_cast<FILE*>(fp));
+    const size_t sz = fread(buf.GetData(), buf.GetDataSize(), 1, static_cast<FILE*>(fp));
 
     //fprintf(stderr,"Read file '%s', %d bytes\n0",)
 

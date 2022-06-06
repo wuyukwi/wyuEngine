@@ -18,10 +18,10 @@ namespace wyuEngine {
         GfxConfiguration(uint32_t r = 8, uint32_t g = 8,
             uint32_t b = 8, uint32_t a = 8,
             uint32_t d = 24, uint32_t s = 0, uint32_t msaa = 0,
-            uint32_t width = 1920, uint32_t height = 1080, const char* app_name = "GameEngineFromScratch") :
+            uint32_t width = 1920, uint32_t height = 1080, bool fullscreen = false, const char* app_name = "GameEngineFromScratch") :
             redBits(r), greenBits(g), blueBits(b), alphaBits(a),
             depthBits(d), stencilBits(s), msaaSamples(msaa),
-            screenWidth(width), screenHeight(height), appName(app_name)
+            screenWidth(width), screenHeight(height), fullscreen(fullscreen), appName(app_name)
         {}
 
         uint32_t redBits; ///< red color channel depth in bits
@@ -33,6 +33,7 @@ namespace wyuEngine {
         uint32_t msaaSamples; ///< MSAA samples
         uint32_t screenWidth;
         uint32_t screenHeight;
+        bool fullscreen;
         const char* appName;
 
         friend std::ostream& operator<<(std::ostream& out, const GfxConfiguration& conf)
@@ -48,6 +49,7 @@ namespace wyuEngine {
                 " M:" << conf.msaaSamples <<
                 " W:" << conf.screenWidth <<
                 " H:" << conf.screenHeight <<
+                " FS:" << conf.fullscreen <<
                 std::endl;
             return out;
         }

@@ -10,11 +10,33 @@
  * Reserved.
  */
 namespace wyuEngine {
-    template <class T> inline void SafeRelease(T** ppInterfaceToRelease) {
-        if (*ppInterfaceToRelease != nullptr) {
-            (*ppInterfaceToRelease)->Release();
+    template <typename T>
+    inline void SAFE_DELETE(T** p)
+    {
+        if (*p != nullptr)
+        {
+            delete(*p);
 
-            (*ppInterfaceToRelease) = nullptr;
+            (*p) = nullptr;
+        }
+
+    }
+    template <typename T>
+    inline void SAFE_DELETE_ARRAY(T** p)
+    {
+        if (*p)
+        {
+            delete[](*p);
+            (*p) = nullptr;
+        }
+    }
+    template <class T>
+    inline void SAFE_RELEASE(T** p)
+    {
+        if (*p)
+        {
+            (*p)->Release();
+            (*p) = nullptr;
         }
     }
 } // namespace My

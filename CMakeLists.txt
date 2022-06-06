@@ -24,6 +24,7 @@ set(BUILD_DIR ${CMAKE_BINARY_DIR})
 #include_directories(Sources)
 #----------------------------------------------------------------
 add_subdirectory(SDK)
+add_subdirectory(External)
 add_subdirectory(Sources)
 add_subdirectory(test)
 

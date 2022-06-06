@@ -11,7 +11,7 @@
  */
 #include "AssetLoader.hpp"
  //#include "BMP.hpp"
-#include "D2DRendererManager.hpp"
+#include "D2DRenderer.hpp"
 #include "MemoryManager.hpp"
 #include "WindowsApplication.hpp"
 #include "utility.hpp"
@@ -23,9 +23,9 @@ using namespace wyuEngine;
 using namespace std;
 
 namespace wyuEngine {
-    class TestGraphicsManager : public D2DRendererManager {
+    class TestGraphicsManager : public D2DRenderer {
     public:
-        using D2DRendererManager::D2DRendererManager;
+        //using D2DRenderer::D2DRenderer;
         void DrawBitmap(const Image image[], int32_t index);
 
     private:
@@ -46,7 +46,7 @@ namespace wyuEngine {
 } // namespace My
 
 namespace wyuEngine {
-    GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 1024, 512, "Texture Load Test (Windows)");
+    GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 1920, 1080, "Texture Load Test (Windows)");
     IApplication* g_pApp = new TestApplication(config);
     RendererManager* g_pGPUManager = new TestGraphicsManager;
     MemoryManager* g_pMemoryManager = new MemoryManager;
@@ -69,8 +69,10 @@ int TestApplication::Initialize() {
            m_Image[1] = parser.Parse(buf);
 
            m_Image[0].data = (buf.m_pData, m_Image[0].Width, m_Image[0].Height)*/
-        asset_loader.SyncOpenAndReadImage("Textures/icelogo-color.bmp", m_Image[0]);
-        asset_loader.SyncOpenAndReadImage("Textures/icelogo-normal.bmp", m_Image[1]);
+           // asset_loader.SyncOpenAndReadImage("Textures/icelogo-color.bmp", m_Image[0]);
+        //asset_loader.SyncOpenAndReadImage("Textures/icelogo-normal.bmp", m_Image[1]);
+        asset_loader.SyncOpenAndReadImage("Textures/mao.png", m_Image[1]);
+        asset_loader.SyncOpenAndReadImage("Textures/png.png", m_Image[0]);
     }
 
     return result;
@@ -86,18 +88,22 @@ void TestApplication::OnDraw() {
 void TestGraphicsManager::DrawBitmap(const Image* image, int32_t index) {
     HRESULT hr;
 
+    if (image[index].pBuffer->GetDataReadOnly() == nullptr)
+        return;
+
     // start build GPU draw command
     m_pRenderTarget->BeginDraw();
+
 
     D2D1_BITMAP_PROPERTIES props;
     props.pixelFormat.format = DXGI_FORMAT_R8G8B8A8_UNORM;
     props.pixelFormat.alphaMode = D2D1_ALPHA_MODE_IGNORE;
     props.dpiX = 72.0f;
     props.dpiY = 72.0f;
-    SafeRelease(&m_pBitmap);
+    SAFE_RELEASE(&m_pBitmap);
     hr = m_pRenderTarget->CreateBitmap(
-        D2D1::SizeU(image[index].Width, image[index].Height), image[index].pBuffer->m_pData,
-        image[index].Width * image[index].channels, props, &m_pBitmap);
+        D2D1::SizeU(image[index].Width, image[index].Height), image[index].pBuffer->GetDataReadOnly(),
+        image[index].Width * 4, props, &m_pBitmap);
 
     D2D1_SIZE_F rtSize = m_pRenderTarget->GetSize();
     D2D1_SIZE_F bmpSize = m_pBitmap->GetSize();
