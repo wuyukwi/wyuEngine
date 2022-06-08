@@ -35,6 +35,11 @@ namespace wyuEngine
             hr = E_FAIL;
             return hr;
         }
+        ZeroMemory(&m_d3dpp, sizeof(m_d3dpp));
+        ZeroMemory(&m_d3ddm, sizeof(m_d3ddm));
+        ZeroMemory(&m_caps, sizeof(m_caps));
+
+
         // 現在のディスプレイモードを取得
         if (FAILED(hr = m_Direct3D->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &m_d3ddm)))
             return hr;
@@ -104,100 +109,100 @@ namespace wyuEngine
     }
 
 
-    uint32_t D3D9Renderer::CreateD3D9FVF(uint32_t flags)
-    {
-        //uint32_t fvf = 0;
+    //uint32_t D3D9Renderer::CreateD3D9FVF(uint32_t flags)
+    //{
+    //    //uint32_t fvf = 0;
 
-        //switch (flags)
-        //{
-        //case GUI_FVF:
-        //    fvf = D3DFVF_GUI;
-        //    break;
-        //default:
-        //    fvf = NULL;
-        //    break;
-        //}
+    //    //switch (flags)
+    //    //{
+    //    //case GUI_FVF:
+    //    //    fvf = D3DFVF_GUI;
+    //    //    break;
+    //    //default:
+    //    //    fvf = NULL;
+    //    //    break;
+    //    //}
 
-        //return fvf;
-    }
+    //    //return fvf;
+    //}
 
-    HRESULT D3D9Renderer::CreateStaticBuffer(uint32_t verType, PrimType primType, uint32_t totalVerts, uint32_t totalIndices, uint32_t stride, void** data, uint32_t* indices, uint32_t* staticId)
-    {
-        //HRESULT hr;
-        //void* ptr;
-        //int index = m_numStaticBuffers;
+    //HRESULT D3D9Renderer::CreateStaticBuffer(uint32_t verType, PrimType primType, uint32_t totalVerts, uint32_t totalIndices, uint32_t stride, void** data, uint32_t* indices, uint32_t* staticId)
+    //{
+    //    //HRESULT hr;
+    //    //void* ptr;
+    //    //int index = m_numStaticBuffers;
 
-        //if (!m_staticBufferList)
-        //{
-        //    m_staticBufferList = new stD3D9StaticBuffer[1];
+    //    //if (!m_staticBufferList)
+    //    //{
+    //    //    m_staticBufferList = new stD3D9StaticBuffer[1];
 
-        //    if (!m_staticBufferList)
-        //    {
-        //        hr = E_FAIL;
-        //        return hr;
-        //    }
+    //    //    if (!m_staticBufferList)
+    //    //    {
+    //    //        hr = E_FAIL;
+    //    //        return hr;
+    //    //    }
 
-        //}
-        //else
-        //{
-        //    stD3D9StaticBuffer* temp;
-        //    temp = new stD3D9StaticBuffer[m_numStaticBuffers + 1];
+    //    //}
+    //    //else
+    //    //{
+    //    //    stD3D9StaticBuffer* temp;
+    //    //    temp = new stD3D9StaticBuffer[m_numStaticBuffers + 1];
 
-        //    memcpy(temp, m_staticBufferList, sizeof(stD3D9StaticBuffer) * m_numStaticBuffers);
+    //    //    memcpy(temp, m_staticBufferList, sizeof(stD3D9StaticBuffer) * m_numStaticBuffers);
 
-        //    delete[] m_staticBufferList;
-        //    m_staticBufferList = temp;
-        //}
+    //    //    delete[] m_staticBufferList;
+    //    //    m_staticBufferList = temp;
+    //    //}
 
-        //m_staticBufferList[index].numVerts = totalVerts;
-        //m_staticBufferList[index].numIndices = totalIndices;
-        //m_staticBufferList[index].primType = primType;
-        //m_staticBufferList[index].stride = stride;
-        //m_staticBufferList[index].fvf = CreateD3DFVF(verType);
+    //    //m_staticBufferList[index].numVerts = totalVerts;
+    //    //m_staticBufferList[index].numIndices = totalIndices;
+    //    //m_staticBufferList[index].primType = primType;
+    //    //m_staticBufferList[index].stride = stride;
+    //    //m_staticBufferList[index].fvf = CreateD3DFVF(verType);
 
-        //if (totalIndices > 0)
-        //{
-        //    if (FAILED(m_Device->CreateIndexBuffer(
-        //        sizeof(size_t) * totalIndices,
-        //        D3DUSAGE_WRITEONLY,
-        //        D3DFMT_INDEX16,
-        //        D3DPOOL_DEFAULT,
-        //        &m_staticBufferList[index].ibPtr, NULL)))
-        //    {
-        //        return UGP_FAIL;
-        //    };
+    //    //if (totalIndices > 0)
+    //    //{
+    //    //    if (FAILED(m_Device->CreateIndexBuffer(
+    //    //        sizeof(size_t) * totalIndices,
+    //    //        D3DUSAGE_WRITEONLY,
+    //    //        D3DFMT_INDEX16,
+    //    //        D3DPOOL_DEFAULT,
+    //    //        &m_staticBufferList[index].ibPtr, NULL)))
+    //    //    {
+    //    //        return UGP_FAIL;
+    //    //    };
 
-        //    if (FAILED(m_staticBufferList[index].ibPtr->Lock(0, 0, (void**)&ptr, 0)))
-        //        return UGP_FAIL;
+    //    //    if (FAILED(m_staticBufferList[index].ibPtr->Lock(0, 0, (void**)&ptr, 0)))
+    //    //        return UGP_FAIL;
 
-        //    memcpy(ptr, indices, sizeof(size_t) * totalIndices);
-        //    m_staticBufferList[index].ibPtr->Unlock();
-        //}
-        //else
-        //{
-        //    m_staticBufferList[index].ibPtr = NULL;
-        //}
+    //    //    memcpy(ptr, indices, sizeof(size_t) * totalIndices);
+    //    //    m_staticBufferList[index].ibPtr->Unlock();
+    //    //}
+    //    //else
+    //    //{
+    //    //    m_staticBufferList[index].ibPtr = NULL;
+    //    //}
 
-        //if (FAILED(m_Device->CreateVertexBuffer(
-        //    totalVerts * stride,
-        //    D3DUSAGE_WRITEONLY,
-        //    m_staticBufferList[index].fvf,
-        //    D3DPOOL_DEFAULT,
-        //    &m_staticBufferList[index].vbPtr, NULL)))
-        //    return UGP_FAIL;
+    //    //if (FAILED(m_Device->CreateVertexBuffer(
+    //    //    totalVerts * stride,
+    //    //    D3DUSAGE_WRITEONLY,
+    //    //    m_staticBufferList[index].fvf,
+    //    //    D3DPOOL_DEFAULT,
+    //    //    &m_staticBufferList[index].vbPtr, NULL)))
+    //    //    return UGP_FAIL;
 
-        //if (FAILED(m_staticBufferList[index].vbPtr->Lock(0, 0, (void**)&ptr, 0)))
-        //    return UGP_FAIL;
+    //    //if (FAILED(m_staticBufferList[index].vbPtr->Lock(0, 0, (void**)&ptr, 0)))
+    //    //    return UGP_FAIL;
 
-        //memcpy(ptr, data, totalVerts * stride);
-        //m_staticBufferList[index].vbPtr->Unlock();
+    //    //memcpy(ptr, data, totalVerts * stride);
+    //    //m_staticBufferList[index].vbPtr->Unlock();
 
 
-        //*staticId = m_numStaticBuffers;
-        //m_numStaticBuffers++;
+    //    //*staticId = m_numStaticBuffers;
+    //    //m_numStaticBuffers++;
 
-        //return UGP_OK;
-    }
+    //    //return UGP_OK;
+    //}
 
     int D3D9Renderer::Initialize()
     {
@@ -210,8 +215,8 @@ namespace wyuEngine
 
     void D3D9Renderer::Finalize()
     {
-        SAFE_RELEASE(&m_Device);
-        SAFE_RELEASE(&m_Direct3D);
+        SAFE_RELEASE(m_Device);
+        SAFE_RELEASE(m_Direct3D);
     }
 
     void D3D9Renderer::Tick()

@@ -11,19 +11,42 @@
  */
 
 #include "main.h"
+#include "D3D9Renderer.hpp"
 
-int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-    LPTSTR lpCmdLine, int nCmdShow) {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+using namespace wyuEngine;
 
-    auto pEngine = new wyuEngine;
-
-    pEngine->Initialize();
-
-    pEngine->Tick();
-
-    pEngine->Finalize();
-
-    return 0;
+namespace wyuEngine
+{
+    GfxConfiguration config(8, 8, 8, 8, 32, 0, 0, 960, 540, false, ("Game Engine From Scratch (TestWindows DX9)"));
+    IApplication* g_pApp = new TestApp(config);
+    RendererManager* g_pGPUManager = new D3D9Renderer;
+    MemoryManager* g_pMemoryManager = new MemoryManager;
+    SceneManager* g_pSceneManager = new SceneManager;
 }
+
+int TestApp::Initialize()
+{
+    const int result = WindowsApplication::Initialize();
+
+    if (result != 0)
+        return result;
+
+
+    return result;
+}
+
+void TestApp::Finalize()
+{
+    WindowsApplication::Finalize();
+
+}
+
+void TestApp::Tick()
+{
+    WindowsApplication::Tick();
+
+}
+
+
+
+

@@ -13,8 +13,21 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-#include "WindowsApplication.hpp"
-#include "wyuEngine.hpp"
-#include "wyuEngineInclude.h"
+#include "Engine.h"
+
+
+class TestApp : public wyuEngine::WindowsApplication
+{
+public:
+    TestApp(wyuEngine::GfxConfiguration& config) : wyuEngine::WindowsApplication(config) {}
+    //virtual ~TestApp() override = default;
+
+    virtual int Initialize() override;
+    virtual void Finalize() override;
+
+    virtual void Tick() override;
+};
+
+
 
 #endif    // __MAIN_H__

@@ -16,7 +16,7 @@ using namespace wyuEngine;
 
 SceneManager::~SceneManager()
 {
-    
+
 }
 
 int SceneManager::Initialize()
@@ -28,12 +28,22 @@ int SceneManager::Initialize()
 
 void SceneManager::Finalize()
 {
-    
+
 }
 
 void SceneManager::Tick()
 {
-    
+
 }
+//
+//void SceneManager::CreateScene(const char* name) const
+//{
+//    m_pScene->AppendChild(std::make_unique<BaseSceneNode>(BaseSceneNode(name)));
+//}
+//
+//const BaseSceneNode& SceneManager::GetSceneForRendering() const
+//{
+//    return *m_pScene;
+//}
 
 

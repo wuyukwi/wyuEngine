@@ -17,7 +17,7 @@ namespace wyuEngine {
     class RendererManager : public IRuntimeModule
     {
     public:
-        virtual ~RendererManager() {}
+        virtual ~RendererManager() override = default;
 
         virtual int Initialize() override;
         virtual void Finalize() override;
