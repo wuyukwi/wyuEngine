@@ -25,6 +25,8 @@
     Common/SceneNode.hpp
     Common/BMP.hpp
 
+    Common/Engine.h
+
     Interface/IApplication.hpp
     Interface/Interface.hpp
     Interface/IRuntimeModule.hpp

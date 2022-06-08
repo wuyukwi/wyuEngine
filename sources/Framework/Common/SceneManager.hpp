@@ -14,6 +14,7 @@
 #include "EngineMath.h"
 #include "IRuntimeModule.hpp"
 #include "SceneNode.hpp"
+#include "SceneObject.hpp"
 
 namespace wyuEngine
 {
@@ -27,7 +28,14 @@ namespace wyuEngine
 
         void Tick() override;
 
-    protected:
+        void CreateScene(const char* name) const;
 
+        //const BaseSceneNode& GetSceneForRendering() const;
+
+
+
+    protected:
+        //std::unique_ptr<BaseSceneNode> m_pScene;
     };
+    extern SceneManager* g_pSceneManager;
 }

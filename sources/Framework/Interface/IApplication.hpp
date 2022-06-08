@@ -7,10 +7,10 @@ namespace wyuEngine {
     class IApplication : public IRuntimeModule
     {
     public:
-        virtual int Initialize() = 0;
-        virtual void Finalize() = 0;
+        virtual int Initialize() override = 0;
+        virtual void Finalize() override = 0;
         // One cycle of the main loop
-        virtual void Tick() = 0;
+        virtual void Tick() override = 0;
 
         virtual bool IsQuit() = 0;
 
