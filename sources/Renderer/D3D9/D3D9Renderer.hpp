@@ -14,7 +14,7 @@
 #include <cstdint>
 #include "RendererManager.hpp"
 #include <d3d9.h>
-#include <d3dx9.h>
+ //#include <d3dx9.h>
 
 namespace wyuEngine {
     class D3D9Renderer :public RendererManager
