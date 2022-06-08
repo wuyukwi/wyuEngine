@@ -83,6 +83,8 @@ namespace wyuEngine
 
         bool        m_bVisible;
 
+        const size_t m_szData;
+
     public:
         SceneObject2D(bool visible = true) : BaseSceneObject(SCENEOBJECT2D), m_bVisible(visible) {}
         void AddIndexArray(SceneObjectIndexArray2D&& array) { m_IndexArray.push_back(std::move(array)); }
@@ -90,8 +92,22 @@ namespace wyuEngine
         void SetTexture(const Image& image) { m_image = image; }
     };
 
+        friend std::ostream& operator<<(std::ostream& out, const SceneObjectVertexArray& obj)
+        {
+            out << "Attribute: " << obj.m_strAttribute << std::endl;
+            out << "Morph Target Index: 0x" << obj.m_nMorphTargetIndex << std::endl;
+            out << "Data Type: " << obj.m_DataType << std::endl;
+            out << "Data Size: 0x" << obj.m_szData << std::endl;
+            out << "Data: ";
+            for (size_t i = 0; i < obj.m_szData; i++)
+            {
+                out << *(static_cast<const float*>(obj.m_pData) + i) << ' ';;
+            }
 
+            return out;
+        }
 
+    };
 
     typedef enum _PrimitiveType {
         PrimitiveTypeNone = 0,        ///< No particular primitive type.

@@ -97,7 +97,7 @@ namespace wyuEngine
         {
             SceneNode::dump(out);
             out << "Visible: " << m_bVisible << std::endl;
-        }
+}
 
     public:
         using SceneNode::SceneNode;

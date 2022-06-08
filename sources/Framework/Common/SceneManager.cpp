@@ -35,15 +35,15 @@ void SceneManager::Tick()
 {
 
 }
-
-void SceneManager::CreateScene(const char* name)
-{
-    m_pScene->AppendChild(std::make_unique<BaseSceneNode>(BaseSceneNode(name)));
-}
-
-const BaseSceneNode& SceneManager::GetSceneForRendering()
-{
-    return *m_pScene;
-}
+//
+//void SceneManager::CreateScene(const char* name) const
+//{
+//    m_pScene->AppendChild(std::make_unique<BaseSceneNode>(BaseSceneNode(name)));
+//}
+//
+//const BaseSceneNode& SceneManager::GetSceneForRendering() const
+//{
+//    return *m_pScene;
+//}
 
 

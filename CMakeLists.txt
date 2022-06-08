@@ -1,26 +1,40 @@
 ﻿cmake_minimum_required (VERSION 3.22)
 
-# glfw-----------------------------------
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#if("cxx_std_17" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+    set(CMAKE_CXX_STANDARD 17)
 
+#elseif("cxx_std_14" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+#    set(CMAKE_CXX_STANDARD 14)
+#else()
+    # CPP11 is always enabled, so there is no need to declare it.
+    #set(CMAKE_CXX_STANDARD 11)
+#endif()
+
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY %{PROJECT_BINARY_DIR}/bin)
 project (wyuEngine)
 
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Common")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Interface")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Math")
-include_directories("${PROJECT_SOURCE_DIR}/Framework/Universal")
-include_directories("${PROJECT_SOURCE_DIR}/RHI")
+# Define Global Constants.
+set(ROOT_DIR ${PROJECT_SOURCE_DIR})
+set(BUILD_DIR ${CMAKE_BINARY_DIR})
 
-include_directories("${PROJECT_SOURCE_DIR}/Platform/Windows")
+# include------------------------------------------------------
+#include_directories(Sources)
+#----------------------------------------------------------------
+add_subdirectory(SDK)
+add_subdirectory(External)
+add_subdirectory(Sources)
+add_subdirectory(test)
 
-add_subdirectory(Framework)
-add_subdirectory(Platform)
-add_subdirectory(RHI)
-
+set(CMAKE_LOG TRUE)
 # ------------------------- Begin Generic CMake Variable Logging ------------------
 
 # /*	C++ comment style not allowed	*/
 
-
+if(CMAKE_LOG)
+	
 # if you are building in-source, this is the same as CMAKE_SOURCE_DIR, otherwise 
 # this is the top level directory of your build tree 
 MESSAGE( STATUS "CMAKE_BINARY_DIR:         " ${CMAKE_BINARY_DIR} )
@@ -83,6 +97,7 @@ MESSAGE( STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION} )
 
 # the processor name (e.g. "Intel(R) Pentium(R) M processor 1.00GHz") 
 MESSAGE( STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR} )
+
 
 # is TRUE on all UNIX-like OS's, including Apple OS X and CygWin
 MESSAGE( STATUS "UNIX: " ${UNIX} )
@@ -160,6 +175,9 @@ MESSAGE( STATUS "CMAKE_COMPILER_IS_GNUCC: " ${CMAKE_COMPILER_IS_GNUCC} )
 # if the compiler is a variant of g++, this should be set to 0 
 MESSAGE( STATUS "CMAKE_COMPILER_IS_GNUCXX : " ${CMAKE_COMPILER_IS_GNUCXX} )
 
+# if the compiler is a variant of g++, this should be set to 0 
+MESSAGE( STATUS "CMAKE_CXX_STANDARD : " ${CMAKE_CXX_STANDARD} )
+
 # the tools for creating libraries 
 MESSAGE( STATUS "CMAKE_AR: " ${CMAKE_AR} )
 MESSAGE( STATUS "CMAKE_RANLIB: " ${CMAKE_RANLIB} )
@@ -168,3 +186,4 @@ MESSAGE( STATUS "CMAKE_RANLIB: " ${CMAKE_RANLIB} )
 #MESSAGE( STATUS ": " ${} )
 
 # ------------------------- End of Generic CMake Variable Logging ------------------
+endif()

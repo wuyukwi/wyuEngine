@@ -10,30 +10,31 @@
  * Reserved.
  */
 namespace wyuEngine {
-    //template <typename T>
-    //inline void SAFE_DELETE(T** p)
-    //{
-    //    if (*p != nullptr)
-    //    {
-    //        delete(*p);
+    //#define SAFE_RELEASE( p )      { if( p ) { ( p )->Release(); ( p ) = NULL; } }
+        //template <typename T>
+        //inline void SAFE_DELETE(T** p)
+        //{
+        //    if (*p != nullptr)
+        //    {
+        //        delete(*p);
 
-    //        (*p) = nullptr;
-    //    }
+        //        (*p) = nullptr;
+        //    }
 
-    //}
-    //template <typename T>
-    //inline void SAFE_DELETE_ARRAY(T** p)
-    //{
-    //    if (*p)
-    //    {
-    //        delete[](*p);
-    //        (*p) = nullptr;
-    //    }
-    //}
+        //}
+        //template <typename T>
+        //inline void SAFE_DELETE_ARRAY(T** p)
+        //{
+        //    if (*p)
+        //    {
+        //        delete[](*p);
+        //        (*p) = nullptr;
+        //    }
+        //}
     template <class T>
     inline void SAFE_RELEASE(T& p)
     {
-        if (p != nullptr)
+        if (p)
         {
             (p)->Release();
             (p) = nullptr;

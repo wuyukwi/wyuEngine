@@ -30,12 +30,12 @@ namespace wyuEngine
 
         void CreateScene(const char* name) const;
 
-        const BaseSceneNode& GetSceneForRendering() const;
+        //const BaseSceneNode& GetSceneForRendering() const;
 
 
 
     protected:
-        std::unique_ptr<BaseSceneNode> m_pScene;
+        //std::unique_ptr<BaseSceneNode> m_pScene;
     };
     extern SceneManager* g_pSceneManager;
 }

@@ -40,6 +40,7 @@ namespace wyuEngine
         ZeroMemory(&m_d3ddm, sizeof(m_d3ddm));
         ZeroMemory(&m_caps, sizeof(m_caps));
 
+
         // 現在のディスプレイモードを取得
         if (FAILED(hr = m_Direct3D->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &m_d3ddm)))
             return hr;
