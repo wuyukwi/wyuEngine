@@ -44,7 +44,7 @@ wyuEngineは拡張性のために仮想基底クラス多く使われてます�
 
 ### 構造図
 <p align="center">
-    <img src="構造図.png"  alt="構造図">
+    <img src="EngineDiagram.png"  alt="Engine Diagram">
   </a>
 </p>
 
