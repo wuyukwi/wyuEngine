@@ -32,7 +32,7 @@ Win10,Win11
 ```
 git clone https://github.com/wuyukwi/wyuEngine.git
 ```
-2. クローンされたフォルダに移動します。
+2. クローンしたフォルダに移動します。
 ```
 cd wyuEngine
 ```
