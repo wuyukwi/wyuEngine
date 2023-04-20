@@ -38,3 +38,7 @@ set(BINARY_ROOT_DIR "${CMAKE_INSTALL_PREFIX}/")
 add_subdirectory(engine)
 add_subdirectory(Demo)
 add_subdirectory(game)
+
+# 起動時にビルドするプロジェクトをDemoに指定する
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Demo)
+
