@@ -23,16 +23,28 @@ wyuEngineは、JSONファイルからゲームオブジェクトを読み込む�
 
 以上は、wyuEngineで利用可能な主な機能の一部です。詳細な使用方法については、サンプルプログラムを参照してください。
 
-## ビルド環境
-Win10/Win11
-c++14以上のバージョンビルドできるコンパイラ
-CMake3.19以上のバージョン
+## 前提条件
 
-## 実行環境
-
-Win10,Win11
+### Windows 10/11
+- Visual Studio 2015（またはそれ以降のバージョン）
+- CMake 3.19（またはそれ以降のバージョン）
+- Git 2.1（またはそれ以降のバージョン）
 
 ## インストール手順
+
+<details>
+  <summary>CMakeインストール手順</summary>
+  
+
+  1. CMakeの公式サイト (https://cmake.org/download/) にアクセスして、Windows向けのインストーラーをダウンロードします。
+
+  2. ダウンロードしたインストーラーを実行し、CMakeをインストールします。インストール時に、「Add CMake to the system PATH for all users」オプションを選択して、CMakeがシステムのPATHに追加されるようにしてください。
+
+  3. インストールが完了したら、コマンドプロンプトを開いて、'cmake --version'コマンドを実行して、CMakeが正しくインストールされていることを確認します。このコマンドが実行されると、CMakeのバージョン情報が表示されます。
+
+</details>
+
+
 1. このリポジトリをクローンします。
 ```
 git clone https://github.com/wuyukwi/wyuEngine.git
@@ -44,7 +56,7 @@ cd wyuEngine
 3. build.batを実行してください。このバッチファイルはプロジェクトを生成し、wyuEngineのDebug構成を自動的にビルドします。
 また、以下のコマンドを使用して最初にVisual Studioプロジェクトを生成し、ビルドディレクトリ内のソリューションを開いて手動でビルドすることもできます。
 ```
-cmake -B build
+cmake -B build -A x64
 
 cmake --build build --config Debug
 ```

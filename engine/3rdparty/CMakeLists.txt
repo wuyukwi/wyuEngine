@@ -10,6 +10,4 @@ if(IMGUI)
 	 set_target_properties(imgui PROPERTIES FOLDER ${third_party_folder}/imgui)
 endif()
 
-set_target_properties(json11 PROPERTIES FOLDER "3rdparty")
-set_target_properties(imgui PROPERTIES FOLDER "3rdparty")
 
