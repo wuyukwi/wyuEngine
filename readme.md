@@ -29,20 +29,21 @@ wyuEngineは、JSONファイルからゲームオブジェクトを読み込む�
 - Visual Studio 2015（またはそれ以降のバージョン）
 - CMake 3.19（またはそれ以降のバージョン）
 - Git 2.1（またはそれ以降のバージョン）
+<details>
+  <summary><b>CMakeインストール手順</b></summary>
+  <br>
+
+1. CMakeの公式サイト (https://cmake.org/download/) にアクセスして、Windows向けのインストーラーをダウンロードします。
+
+2. ダウンロードしたインストーラーを実行し、CMakeをインストールします。インストール時に、「Add CMake to the system PATH for all users」オプションを選択して、CMakeがシステムのPATHに追加されるようにしてください。
+
+3. インストールが完了したら、コマンドプロンプトを開いて、'cmake --version'コマンドを実行して、CMakeが正しくインストールされていることを確認します。このコマンドが実行されると、CMakeのバージョン情報が表示されます。
+
+  <br>
+</details>
 
 ## インストール手順
 
-<details>
-  <summary>CMakeインストール手順</summary>
-  
-
-  1. CMakeの公式サイト (https://cmake.org/download/) にアクセスして、Windows向けのインストーラーをダウンロードします。
-
-  2. ダウンロードしたインストーラーを実行し、CMakeをインストールします。インストール時に、「Add CMake to the system PATH for all users」オプションを選択して、CMakeがシステムのPATHに追加されるようにしてください。
-
-  3. インストールが完了したら、コマンドプロンプトを開いて、'cmake --version'コマンドを実行して、CMakeが正しくインストールされていることを確認します。このコマンドが実行されると、CMakeのバージョン情報が表示されます。
-
-</details>
 
 
 1. このリポジトリをクローンします。
